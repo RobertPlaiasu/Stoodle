@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,700;1,400&display=swap');
 body, html {
-    overflow: hidden!important;
     background: url("../Images/background.jpg")!important;
     background-size: cover;
 }
@@ -18,7 +17,6 @@ body, html {
 
 #content {
     background-color: var(--white);
-    height: 100vh;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }

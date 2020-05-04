@@ -58,7 +58,7 @@ CREATE TABLE `facultati` (
   `Examenadmi` tinyint(1) DEFAULT NULL,
   `Universitatea` varchar(256) DEFAULT NULL,
   `Profil` text DEFAULT NULL,
-  `Poza` text NOT NULL DEFAULT 'default.jpg',
+  `Poza` text DEFAULT NULL,
   `job` int(1) DEFAULT NULL,
   `pasiune_facultati` varchar(64) NOT NULL,
   `materie1` varchar(64) DEFAULT NULL,
@@ -143,7 +143,7 @@ CREATE TABLE `users` (
   `sport` varchar(64) DEFAULT NULL,
   `stres` int(1) DEFAULT NULL,
   `Judet` text DEFAULT NULL,
-  `PozaUser` text DEFAULT 'UserDefault.jpg'
+  `PozaUser` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

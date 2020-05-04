@@ -1,4 +1,5 @@
 <?php
+require 'password.php';
  if(isset($_POST['signupsubmit'])){
 
    require 'datacon.php';

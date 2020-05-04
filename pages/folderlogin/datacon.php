@@ -1,8 +1,8 @@
 <?php
  $server="localhost";
- $dbuser="root";
- $dbpass="";
- $dbname="stoodle";
+ $dbuser="r43949el_admin";
+ $dbpass="r43949el_";
+ $dbname="r43949el_Stoodle";
 
  $connection=mysqli_connect($server,$dbuser,$dbpass,$dbname);
  if (!$connection) {
