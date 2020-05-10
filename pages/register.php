@@ -8,7 +8,7 @@ include 'functii/functii.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height:100%">
 
     <head>
         <meta charset="UTF-8">
@@ -19,8 +19,8 @@ include 'functii/functii.php';
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
 
-    <body>
-        <div class="row">
+    <body style="height:100%!important">
+        <div class="row"  style="overflow: scroll;-webkit-overflow-scrolling: touch; height:100%!important">
 
             <div class="col-lg-4">
                 <div id="text">

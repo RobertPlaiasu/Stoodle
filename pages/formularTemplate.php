@@ -6,7 +6,7 @@ session_start();
 require_once './folderlogin/datacon.php';
 
 
-if(empty($_SESSION['mailUser'])&& empty($_SESSION['mailGmail'])){
+if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
 
     $select=$_GET['select'];
     $token=$_GET['valid'];
