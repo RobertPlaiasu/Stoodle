@@ -13,20 +13,25 @@ html {
 
 /* BUTTON */
 .button {
-    background-color: var(--black);
-    color: var(--yellow)!important;
-    font-weight: 700;
-    border-radius: 8px;
+    all: unset;
+    background: rgb(237,70,0);
+    background: linear-gradient(90deg, rgba(237,70,0,1) 0%, rgba(160,47,0,1) 100%);
+    color: white;
     padding: .5em 1.5em;
     font-size: 1.5rem;
-    margin: 1em;
     border: 0;
+    border-radius: 50px;
+    width: 80%;
+    cursor: pointer;
+    text-align: center;
 }
 
 .button:hover {
-    background-color: var(--yellow);
-    color: var(--black)!important;
-    transition: .3s ease-in;
+    background: rgb(160,47,0);
+    background: linear-gradient(90deg, rgba(160,47,0,1) 0%, rgba(237,70,0,1) 100%);;
+    transition: .1s ease-in;
+    color: white;
+    text-decoration: none;
 }
 
 .hidden {
