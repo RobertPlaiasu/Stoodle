@@ -2,9 +2,35 @@
 
 include 'array.php';
 include 'functii/functii.php';
-session_start();
 require_once './folderlogin/datacon.php';
 
+session_start();
+
+function checkTokens($select, $token){
+    // If the tokens are empty and consists of all hexadecimal digits.
+    if( empty($select) || empty($token) || !(ctype_xdigit($select) || !ctype_xdigit($token))){
+        header("Location: ./register.php?error=invalidlink");
+        exit();
+    }
+}
+
+function checkDatabase($stmt, $mysql){
+    if (!mysqli_stmt_prepare($stmt,$mysql))
+    {
+        header("Location: ./register.php?error=mysqlerror");
+        exit();
+    }
+}
+
+function checkPassword($token, $tokenVerificare){
+
+    $ok=password_verify($token, $tokenVerificare);
+    if(!$ok){
+        header("Location: ./register.php?error=alttoken");
+        exit();
+    }
+
+}
 
 if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
 
@@ -12,69 +38,52 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
     $token=$_GET['valid'];
     $date=date("U");
 
-    if(empty($select)||empty($token)){
-        header("Location: ./register.php?error=invalidlink");
-        exit();
-    }
-    if(ctype_xdigit($select)===true && ctype_xdigit($token)===true){
+    checkTokens($select, $token);
 
-        $mysql="SELECT * FROM users_verificare WHERE expireVerificare>=? AND selectVerificare =?";
+    $mysql="SELECT * FROM users_verificare WHERE expireVerificare>=? AND selectVerificare =?";
+    $stmt=mysqli_stmt_init($connection);
+    
+    checkDatabase($stmt, $mysql);
+
+    mysqli_stmt_bind_param($stmt,"ss",$date,$select);
+    mysqli_stmt_execute($stmt);
+    $rezultat=mysqli_stmt_get_result($stmt);
+
+    if(!$rand=mysqli_fetch_assoc($rezultat))
+    {
+        $mysql="DELETE FROM users_verificare WHERE selectVerificare=?;";
         $stmt=mysqli_stmt_init($connection);
-        if (!mysqli_stmt_prepare($stmt,$mysql))
-        {
-            header("Location: ./register.php?error=mysqlerror");
-            exit();
-        }
-        mysqli_stmt_bind_param($stmt,"ss",$date,$select);
+
+        checkDatabase($stmt, $mysql);
+
+        mysqli_stmt_bind_param($stmt,"s",$select);
         mysqli_stmt_execute($stmt);
-        $rezultat=mysqli_stmt_get_result($stmt);
-        if(!$rand=mysqli_fetch_assoc($rezultat))
-        {
-            $mysql="DELETE FROM users_verificare WHERE selectVerificare=?;";
-            $stmt=mysqli_stmt_init($connection);
-            if (!mysqli_stmt_prepare($stmt,$mysql))
-            {
-                header("Location: ./register.php?error=mysqlerror");
-                exit();
-            }
-            mysqli_stmt_bind_param($stmt,"s",$select);
-            mysqli_stmt_execute($stmt);
-            header("Location: ./register.php?error=expire");
-            exit();
-        }
-        $ok=password_verify($token,$rand['tokenVerificare']);
-        if($ok===false){
-            header("Location: ./register.php?error=alttoken");
-            exit();
-        }
-        elseif($ok===true)
-        {
 
-            $mysql="INSERT INTO users(Nume,Prenume,mailUser,pwdUsers) VAlUES(?,?,?,?) ";
-            $stmt=mysqli_stmt_init($connection);
-            if (!mysqli_stmt_prepare($stmt,$mysql)) {
-                header("Location: ./register.php?error=mysqlerror&select=".$select."&valid=".$token);
-                exit();
-            }
-            mysqli_stmt_bind_param($stmt,"ssss",$rand['numeVerificare'],$rand['prenumeVerificare'],$rand['mailVerificare'],$rand['parolaVerificare']);
-            mysqli_stmt_execute($stmt);
-
-
-            $id=$rand['idVerificare'];
-            $_SESSION['mailUser']=$rand['mailVerificare'];
-            $mysql="DELETE FROM users_verificare WHERE idVerificare='$id'";
-            mysqli_query($connection,$mysql);
-
-        }
-        else {
-            header("Location: ./register.php?error=eroaregenerala");
-            exit();
-        }
-    }
-    else {
-        header("Location: ./register.php?error=invalidlink");
+        header("Location: ./register.php?error=expire");
         exit();
     }
+
+    checkPassword($token, $rand['tokenVerificare']);
+    
+    $mysql="INSERT INTO users(Nume,Prenume,mailUser,pwdUsers) VAlUES(?,?,?,?) ";
+    $stmt=mysqli_stmt_init($connection);
+
+    checkDatabase($stmt, $mysql);
+
+    // if (!mysqli_stmt_prepare($stmt,$mysql)) {
+    //     header("Location: ./register.php?error=mysqlerror&select=".$select."&valid=".$token);
+    //     exit();
+    // }
+
+    mysqli_stmt_bind_param($stmt,"ssss",$rand['numeVerificare'],$rand['prenumeVerificare'],$rand['mailVerificare'],$rand['parolaVerificare']);
+    mysqli_stmt_execute($stmt);
+
+    $id=$rand['idVerificare'];
+    $_SESSION['mailUser']=$rand['mailVerificare'];
+
+    $mysql="DELETE FROM users_verificare WHERE idVerificare='$id'";
+    mysqli_query($connection,$mysql);
+
 }
 
 

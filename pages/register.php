@@ -1,10 +1,10 @@
 <?php
+include 'functii/functii.php';
 session_start();
 if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
   header("Location: ./homePage.php");
   exit();
 }
-include 'functii/functii.php';
 ?>
 
 <!DOCTYPE html>

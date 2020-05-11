@@ -1,7 +1,6 @@
 <?php
 require './folderlogin/datacon.php';
 require './functii/functii.php';
-//session_start();
 
 class facultate {
     public $Indexf;
@@ -52,6 +51,7 @@ if ($result->num_rows > 0) {
 }
 
 $facultati = array();
+
 // GET DATA
 foreach ($myArray as $_facultate) {
     $temp = new facultate();
