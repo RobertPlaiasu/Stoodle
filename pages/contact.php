@@ -15,6 +15,7 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
         <link rel="stylesheet" href="./CSS/navbar.css">
         <link rel="stylesheet" href="./CSS/contact.css">
         <link rel="stylesheet" href="./CSS/base.css">
+        <link rel="icon" href="../logo.ico" type="image/x-icon" />
         <script src="https://kit.fontawesome.com/0dfb644902.js" crossorigin="anonymous"></script>
         <title>Stoodle</title>
     </head>
