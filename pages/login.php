@@ -1,12 +1,12 @@
 <?php
 require 'folderlogin/google-config.php';
+include 'functii/functii.php';
+require_once './folderlogin/google-config.php';
 session_start();
 if (isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])) {
     header("Location: ./homePage.php");
     exit();
 }
-include 'functii/functii.php';
-require_once './folderlogin/google-config.php';
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +16,7 @@ require_once './folderlogin/google-config.php';
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Stoodle | Conectare</title>
+        <link rel="icon" href="../logo.ico" type="image/x-icon" />
         <link rel="stylesheet" href="./CSS/login.css">
         <link rel="stylesheet" href="./CSS/base.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -39,10 +40,10 @@ require_once './folderlogin/google-config.php';
                         <div class="form-group">
 
                             <?php
-                            erore2("sqlierror","Eroare server!");
-                            erore2("fatalerrorsql","Eroare aplicatie!");
-                            succes("resetare","Parola a fost schimbata");
-                            succes("register","Verifica adresa de email pentru a te putea loga!");
+                            getSecondErrorMessage("sqlierror","Eroare server!");
+                            getSecondErrorMessage("fatalerrorsql","Eroare aplicatie!");
+                            getSuccesMessage("resetare","Parola a fost schimbata");
+                            getSuccesMessage("register","Verifica adresa de email pentru a te putea loga!");
                             ?>
 
                             <label for="exampleInputEmail1">Email</label>
@@ -59,9 +60,9 @@ require_once './folderlogin/google-config.php';
                             <small id="emailHelp" class="form-text alert-note">
 
                                 <?php
-                                erore1("emptymail",'Completeaza campul !');
-                                erore1("nuUser",'Email-ul nu a fot gasit!');
-                                erore1("invalidmailuserid",'Email-ul este invalid!');
+                                getMainErrorMessage("emptymail",'Completeaza campul !');
+                                getMainErrorMessage("nuUser",'Email-ul nu a fot gasit!');
+                                getMainErrorMessage("invalidmailuserid",'Email-ul este invalid!');
                                 ?>
 
                             </small>
@@ -74,9 +75,9 @@ require_once './folderlogin/google-config.php';
                             <input type="password" name="passw" class="form-control" id="exampleInputPassword1">
                             <small id="emailHelp" class="form-text alert-note">
                                 <?php
-                                erore1("emptypass","Completeaza campul");
-                                erore1("invalidpassw","Pentru parola se folosesc doar caractere a alfabetui englez si cifrele de la 0-9!");
-                                erore1("parolagresita","Combinatia email si parola este gresita");
+                                getMainErrorMessage("emptypass","Completeaza campul");
+                                getMainErrorMessage("invalidpassw","Pentru parola se folosesc doar caractere a alfabetui englez si cifrele de la 0-9!");
+                                getMainErrorMessage("parolagresita","Combinatia email si parola este gresita");
                                 ?>
                             </small>
 
