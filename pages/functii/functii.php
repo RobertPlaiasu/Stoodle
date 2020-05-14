@@ -50,59 +50,45 @@ function binarySearch (Array $array, $target) {
 function compareClass ($valoare1,$valoare_user,$valoare2,$valoare3) {
 
   //TODO: get those arries from datebase
-  const materii_biologie=array("Chimie","Biologie","Fizica","Matematica");
-  const materii_straine=array("Engleza","Franceza","Germana","Spaniola","Latina");
-  const materii_matematica=array("Matematica","Fizica","Informatica");
-  const materii_informatica=array("TIC","Informatica");
-  const materii_antreprenor=array("ATP","Economie","Educatie civica");
-  const materii_psihologie=array("Psihologie","Sociologie");
-  const materii_geografie=array("Geografie","Istorie");
+  $materii_biologie=array("Chimie","Biologie","Fizica","Matematica");
+  $materii_straine=array("Engleza","Franceza","Germana","Spaniola","Latina");
+  $materii_matematica=array("Matematica","Fizica","Informatica");
+  $materii_informatica=array("TIC","Informatica");
+  $materii_antreprenor=array("ATP","Economie","Educatie civica");
+  $materii_psihologie=array("Psihologie","Sociologie");
+  $materii_geografie=array("Geografie","Istorie");
 
-  /* NEW APPROACH */
   if(($valoare_user == $valoare1) || ($valoare_user == $valoare2) || ($valoare_user == $valoare3))  return 5;
 
-  const allClasses = array($materii_biologie, $materii_geografie, $materii_informatica, $materii_matematica, $materii_psihologie. $materii_straine, $materii_antreprenor);
-  const values = array($valoare1, $valoare2, $valoare3);
-  const userExistsIndex = checkExists($valoare_user, $array);
+  if((in_array($valoare1,$materii_straine) && in_array($valoare_user,$materii_straine)) || 
+      (in_array($valoare2,$materii_straine) && in_array($valoare_user,$materii_straine)) || 
+      (in_array($valoare3,$materii_straine) && in_array($valoare_user,$materii_straine)))  return 3;
 
-  for($index = 0; $index < count($values); $index++)
-    if(checkExists($values[index], $allClasses) == $userExitsIndex ) return 3
+  if((in_array($valoare1,$materii_biologie) && in_array($valoare_user,$materii_biologie)) || 
+      (in_array($valoare2,$materii_biologie) && in_array($valoare_user,$materii_biologie)) || 
+      (in_array($valoare3,$materii_biologie) && in_array($valoare_user,$materii_biologie)))  return 3;
 
-  return 0;
+  if((in_array($valoare1,$materii_matematica) && in_array($valoare_user,$materii_matematica)) || 
+      (in_array($valoare2,$materii_matematica) && in_array($valoare_user,$materii_matematica)) || 
+      (in_array($valoare3,$materii_matematica) && in_array($valoare_user,$materii_matematica)))  return 3;
 
-  /* OLD APPROACH */
+  if((in_array($valoare1,$materii_informatica) && in_array($valoare_user,$materii_informatica)) || 
+      (in_array($valoare2,$materii_informatica) && in_array($valoare_user,$materii_informatica)) || 
+      (in_array($valoare3,$materii_informatica) && in_array($valoare_user,$materii_informatica)))  return 3;
 
-  // if(($valoare_user == $valoare1) || ($valoare_user == $valoare2) || ($valoare_user == $valoare3))  return 5;
+  if((in_array($valoare1,$materii_antreprenor) && in_array($valoare_user,$materii_antreprenor)) || 
+      (in_array($valoare2,$materii_antreprenor) && in_array($valoare_user,$materii_antreprenor)) || 
+      (in_array($valoare3,$materii_antreprenor) && in_array($valoare_user,$materii_antreprenor)))  return 3;
 
-  // if((in_array($valoare1,$materii_straine) && in_array($valoare_user,$materii_straine)) || 
-  //     (in_array($valoare2,$materii_straine) && in_array($valoare_user,$materii_straine)) || 
-  //     (in_array($valoare3,$materii_straine) && in_array($valoare_user,$materii_straine)))  return 3;
+  if((in_array($valoare1,$materii_psihologie) && in_array($valoare_user,$materii_psihologie)) || 
+      (in_array($valoare2,$materii_psihologie) && in_array($valoare_user,$materii_psihologie)) || 
+      (in_array($valoare3,$materii_psihologie) && in_array($valoare_user,$materii_psihologie)))  return 3;
 
-  // if((in_array($valoare1,$materii_biologie) && in_array($valoare_user,$materii_biologie)) || 
-  //     (in_array($valoare2,$materii_biologie) && in_array($valoare_user,$materii_biologie)) || 
-  //     (in_array($valoare3,$materii_biologie) && in_array($valoare_user,$materii_biologie)))  return 3;
-
-  // if((in_array($valoare1,$materii_matematica) && in_array($valoare_user,$materii_matematica)) || 
-  //     (in_array($valoare2,$materii_matematica) && in_array($valoare_user,$materii_matematica)) || 
-  //     (in_array($valoare3,$materii_matematica) && in_array($valoare_user,$materii_matematica)))  return 3;
-
-  // if((in_array($valoare1,$materii_informatica) && in_array($valoare_user,$materii_informatica)) || 
-  //     (in_array($valoare2,$materii_informatica) && in_array($valoare_user,$materii_informatica)) || 
-  //     (in_array($valoare3,$materii_informatica) && in_array($valoare_user,$materii_informatica)))  return 3;
-
-  // if((in_array($valoare1,$materii_antreprenor) && in_array($valoare_user,$materii_antreprenor)) || 
-  //     (in_array($valoare2,$materii_antreprenor) && in_array($valoare_user,$materii_antreprenor)) || 
-  //     (in_array($valoare3,$materii_antreprenor) && in_array($valoare_user,$materii_antreprenor)))  return 3;
-
-  // if((in_array($valoare1,$materii_psihologie) && in_array($valoare_user,$materii_psihologie)) || 
-  //     (in_array($valoare2,$materii_psihologie) && in_array($valoare_user,$materii_psihologie)) || 
-  //     (in_array($valoare3,$materii_psihologie) && in_array($valoare_user,$materii_psihologie)))  return 3;
-
-  // if((in_array($valoare1,$materii_geografie) && in_array($valoare_user,$materii_geografie)) || 
-  //     (in_array($valoare2,$materii_geografie) && in_array($valoare_user,$materii_geografie)) || 
-  //     (in_array($valoare3,$materii_geografie) && in_array($valoare_user,$materii_geografie)))  return 3;
+  if((in_array($valoare1,$materii_geografie) && in_array($valoare_user,$materii_geografie)) || 
+      (in_array($valoare2,$materii_geografie) && in_array($valoare_user,$materii_geografie)) || 
+      (in_array($valoare3,$materii_geografie) && in_array($valoare_user,$materii_geografie)))  return 3;
   
-  // return 0;
+  return 0;
 }
 
 function compareBranch ($valoare,$valoare_user) {
@@ -119,19 +105,19 @@ function compareBranch ($valoare,$valoare_user) {
 
 function comparePassion ($valoare,$valoare_user, $intensity) {
 
-  const pasiune_programare=array("Matematica","Programare/Calculatoare","Electronica","Cibernetica");
-  const pasiune_fizica=array("Matematica","Fizica","Astronomie","Arhitectura","Constructii","Inginerie electrica","Electronica","Inginerie Aerospatila");
-  const pasiune_medicina=array("Chimie","Medicina","Biologie","Animale","Agricultura","Ecologie","Animale");
-  const pasiune_politica=array("Politica","Drept");
-  const pasiune_lingvistica=array("Limbi straine","Literatura","Limba romana","Filozofie","Psihologie");
-  const pasiune_jurnalism=array("Jurnalism","Editare video/sunet","Regie","Actorie");
-  const pasiune_geografie=array("Geografie","Istorie");
-  const pasiune_sport=array("Biologie","Medicina","Sport");
-  const pasiune_afaceri=array("Business","Economie","Matematica");
-  const pasiune_serviciu=array("Drept","Serviciul in cadrul politiei","Serviciul militar");
-  const pasiune_design=array("Design","Desen","Editare video/sunet");
-  const pasiune_religie=array("Religie","Istorie");
-  const pasiune_geologie=array("Geologie","Geografie","Biologie");
+  $pasiune_programare=array("Matematica","Programare/Calculatoare","Electronica","Cibernetica");
+  $pasiune_fizica=array("Matematica","Fizica","Astronomie","Arhitectura","Constructii","Inginerie electrica","Electronica","Inginerie Aerospatila");
+  $pasiune_medicina=array("Chimie","Medicina","Biologie","Animale","Agricultura","Ecologie","Animale");
+  $pasiune_politica=array("Politica","Drept");
+  $pasiune_lingvistica=array("Limbi straine","Literatura","Limba romana","Filozofie","Psihologie");
+  $pasiune_jurnalism=array("Jurnalism","Editare video/sunet","Regie","Actorie");
+  $pasiune_geografie=array("Geografie","Istorie");
+  $pasiune_sport=array("Biologie","Medicina","Sport");
+  $pasiune_afaceri=array("Business","Economie","Matematica");
+  $pasiune_serviciu=array("Drept","Serviciul in cadrul politiei","Serviciul militar");
+  $pasiune_design=array("Design","Desen","Editare video/sunet");
+  $pasiune_religie=array("Religie","Istorie");
+  $pasiune_geologie=array("Geologie","Geografie","Biologie");
 
   if($valoare_user == $valoare) return $intensity * 10;
 

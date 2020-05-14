@@ -37,12 +37,12 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                     <form action="folderlogin/signupphp.php" method="post">
                         <div class="form-group row">
                           <?php
-                          getSecondMessage("mysqlerror","Eroare baza de date!");
-                          getSecondMessage("invalidlink","Link-ul este invalid!");
-                          getSecondMessage("expire","Timpul pentru verificarea adresei de email a fost depasit trebuie sa completezi din nou formularul!");
-                          getSecondMessage("alttoken","Tokenul nu este bun!");
-                          getSecondMessage("eroaregenerala","Eroare aplicatie!");
-                          getgetSuccesMessage("register","Te-ai inregistrat cu succes!Acum verifica adresa ta de email!");
+                          getSecondErrorMessage("mysqlerror","Eroare baza de date!");
+                          getSecondErrorMessage("invalidlink","Link-ul este invalid!");
+                          getSecondErrorMessage("expire","Timpul pentru verificarea adresei de email a fost depasit trebuie sa completezi din nou formularul!");
+                          getSecondErrorMessage("alttoken","Tokenul nu este bun!");
+                          getSecondErrorMessage("eroaregenerala","Eroare aplicatie!");
+                          getSuccesMessage("register","Te-ai inregistrat cu succes!Acum verifica adresa ta de email!");
                            ?>
                             <div class="col-lg-6">
                                 <label for="exampleInputEmail1">Nume de familie</label>
