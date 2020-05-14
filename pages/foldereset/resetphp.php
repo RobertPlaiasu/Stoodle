@@ -83,7 +83,7 @@ $mail->Host="ssl://smtp.gmail.com";
 $mail->Port='465';
 $mail->isHTML(true);
 $mail->Username='phprobertplaiasu03@gmail.com';
-$mail->Password='testgmail1234';
+$mail->Password='mirceaimparatul';
 $mail->SetFrom('phprobertplaiasu03@gmail.com');
 $mail->Subject='Resetarea parolei a contului Stoodle';
 $mail->Body='

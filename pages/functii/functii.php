@@ -1,22 +1,22 @@
 <?php
 
-function erore1($value,$msg)
+function getMainErrorMessage($errorType, $message)
 {
-    if(isset($_GET['error']) && $_GET['error']==$value){
-      echo $msg;
+    if(isset($_GET['error']) && $_GET['error']==$errorType){
+      echo $message;
     }
 }
 
-function erore2($value,$msg)
+function getSecondErrorMessage($errorType, $message)
 {
-    if(isset($_GET['error']) && $_GET['error']==$value){
-      echo '<div class="alert alert-danger" role="alert">'.$msg.'</div>';
+    if(isset($_GET['error']) && $_GET['error']==$errorType){
+      echo '<div class="alert alert-danger" role="alert">'.$message.'</div>';
     }
 }
-function succes($value,$msg)
+function getSuccesMessage($succesType, $message)
 {
-    if(isset($_GET['succes']) && $_GET['succes']==$value){
-      echo '<div class="alert alert-success" role="alert">'.$msg.'</div>';
+    if(isset($_GET['succes']) && $_GET['succes']==$succesType){
+      echo '<div class="alert alert-success" role="alert">'.$message.'</div>';
     }
 }
 

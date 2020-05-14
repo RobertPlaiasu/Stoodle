@@ -27,8 +27,8 @@ include 'functii/functii.php';
                     <form action="foldereset/newparolaphp.php" method="post">
                         <div class="form-group row">
                           <?php
-                          erore2("mysqlerror","Eroare baza de date!");
-                          erore2("anothertoken","Tokenul este gresit")
+                          getSecondErrorMessage("mysqlerror","Eroare baza de date!");
+                          getSecondErrorMessage("anothertoken","Tokenul este gresit")
                            ?>
                             <div class="col-lg-6">
                               <?php
@@ -48,14 +48,14 @@ include 'functii/functii.php';
                                 <input type="password" name="resetparola" class="form-control">
                                 <small class="form-text alert-note">
                                     <?php
-                                    erore1("emptyfieldpassw","Completeaza toate campurile!");
-                                    erore1("invalidpassw","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
-                                    erore1("micpassw","Parola este prea scurta trebuie sa aiba minim 8 caractere!");
-                                    erore1("marepassw","Parola este prea lunga poate sa aiba maxim 48 de caractere!");
-                                    erore1("identicpasswnume","Parola este asemanatoare  cu numele!");
-                                    erore1("identicpasswprenume","Parola este asemanatoare  cu prenumele!");
-                                    erore1("difparola","Parola este diferita fata de cofirmare parola!");
-                                    erore1("aceeasiparola","Parola este asemanatoare cu cea veche!")
+                                    getMainErrorMessage("emptyfieldpassw","Completeaza toate campurile!");
+                                    getMainErrorMessage("invalidpassw","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
+                                    getMainErrorMessage("micpassw","Parola este prea scurta trebuie sa aiba minim 8 caractere!");
+                                    getMainErrorMessage("marepassw","Parola este prea lunga poate sa aiba maxim 48 de caractere!");
+                                    getMainErrorMessage("identicpasswnume","Parola este asemanatoare  cu numele!");
+                                    getMainErrorMessage("identicpasswprenume","Parola este asemanatoare  cu prenumele!");
+                                    getMainErrorMessage("difparola","Parola este diferita fata de cofirmare parola!");
+                                    getMainErrorMessage("aceeasiparola","Parola este asemanatoare cu cea veche!")
                                     ?>
                                 </small>
                             </div>
@@ -65,10 +65,10 @@ include 'functii/functii.php';
                                 <input type="password" name="resetconfirmareparola" class="form-control">
                                 <small class="form-text alert-note">
                                     <?php
-                                    erore1("emptyfieldpasswrepeat","Completeaza toate campurile!");
-                                    erore1("invalidpasswrepeat","Pentru repetare parola se pot folosi doar cifre si litere ale alfabetului englez!");
-                                    erore1("micpasswrepeat","Repetare parola este prea scurta trebuie sa aiba minim 8 caractere!");
-                                    erore1("marepasswrepeat","Parola este prea lunga poate sa aiba maxim 48 de caractere!");
+                                    getMainErrorMessage("emptyfieldpasswrepeat","Completeaza toate campurile!");
+                                    getMainErrorMessage("invalidpasswrepeat","Pentru repetare parola se pot folosi doar cifre si litere ale alfabetului englez!");
+                                    getMainErrorMessage("micpasswrepeat","Repetare parola este prea scurta trebuie sa aiba minim 8 caractere!");
+                                    getMainErrorMessage("marepasswrepeat","Parola este prea lunga poate sa aiba maxim 48 de caractere!");
                                     ?>
                                 </small>
                             </div>

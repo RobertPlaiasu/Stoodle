@@ -37,12 +37,12 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                     <form action="folderlogin/signupphp.php" method="post">
                         <div class="form-group row">
                           <?php
-                          erore2("mysqlerror","Eroare baza de date!");
-                          erore2("invalidlink","Link-ul este invalid!");
-                          erore2("expire","Timpul pentru verificarea adresei de email a fost depasit trebuie sa completezi din nou formularul!");
-                          erore2("alttoken","Tokenul nu este bun!");
-                          erore2("eroaregenerala","Eroare aplicatie!");
-                          succes("register","Te-ai inregistrat succes!Acum verifica adresa ta de email!");
+                          getSecondMessage("mysqlerror","Eroare baza de date!");
+                          getSecondMessage("invalidlink","Link-ul este invalid!");
+                          getSecondMessage("expire","Timpul pentru verificarea adresei de email a fost depasit trebuie sa completezi din nou formularul!");
+                          getSecondMessage("alttoken","Tokenul nu este bun!");
+                          getSecondMessage("eroaregenerala","Eroare aplicatie!");
+                          getgetSuccesMessage("register","Te-ai inregistrat cu succes!Acum verifica adresa ta de email!");
                            ?>
                             <div class="col-lg-6">
                                 <label for="exampleInputEmail1">Nume de familie</label>
@@ -59,9 +59,9 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                                 <small class="form-text alert-note">
 
                                     <?php
-                                    erore1("emptyfieldnume","Completeaza toate campurile!");
-                                    erore1("invalidnume","Se pot folosi doar litere ale alfabetui englez!");
-                                    erore1("marenume","Numele este prea lung");
+                                    getMainErrorMessage("emptyfieldnume","Completeaza toate campurile!");
+                                    getMainErrorMessage("invalidnume","Se pot folosi doar litere ale alfabetui englez!");
+                                    getMainErrorMessage("marenume","Numele este prea lung");
                                     ?>
 
                                 </small>
@@ -86,9 +86,9 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
 
                                     <?php
 
-                                    erore1("emptyfieldprenume","Completeaza toate campurile!");
-                                    erore1("invalidprenume","Se pot folosi doar litere ale alfabetui englez!");
-                                    erore1("mareprenume","Numele este prea lung");
+                                    getMainErrorMessage("emptyfieldprenume","Completeaza toate campurile!");
+                                    getMainErrorMessage("invalidprenume","Se pot folosi doar litere ale alfabetui englez!");
+                                    getMainErrorMessage("mareprenume","Numele este prea lung");
 
                                     ?>
 
@@ -113,10 +113,10 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                                 <small class="form-text alert-note">
 
                                     <?php
-                                    erore1("emptyfieldemail","Completeaza toate campurile!");
-                                    erore1("invalidmail","Email-ul este invalid");
-                                    erore1("mailother","Email-ul si confirmare email");
-                                    erore1("mailluat","Adresa de email este deja inregistrata!");
+                                    getMainErrorMessage("emptyfieldemail","Completeaza toate campurile!");
+                                    getMainErrorMessage("invalidmail","Email-ul este invalid");
+                                    getMainErrorMessage("mailother","Email-ul si confirmare email");
+                                    getMainErrorMessage("mailluat","Adresa de email este deja inregistrata!");
                                     ?>
 
                                 </small>
@@ -136,8 +136,8 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                                 <small class="form-text alert-note">
                                     <?php
 
-                                    erore1("emptyfieldemailrepeat","Completeaza toate campurile!");
-                                    erore1("invalidmailrepeat","Email-ul este invalid!");
+                                    getMainErrorMessage("emptyfieldemailrepeat","Completeaza toate campurile!");
+                                    getMainErrorMessage("invalidmailrepeat","Email-ul este invalid!");
 
                                     ?>
                                 </small>
@@ -150,13 +150,13 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                                 <input type="password" name="passw" class="form-control">
                                 <small class="form-text alert-note">
                                     <?php
-                                    erore1("emptyfieldpass","Completeaza toate campurile!");
-                                    erore1("invalidpassw","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
-                                    erore1("micpassw","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
-                                    erore1("marepassw","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
-                                    erore1("identicpasswnume","Parola este asemanatoare  cu numele!");
-                                    erore1("identicpasswprenume","Parola este asemanatoare  cu prenumele!");
-                                    erore1("passwdother","Parola este diferita fata de cofirmare parola!");
+                                    getMainErrorMessage("emptyfieldpass","Completeaza toate campurile!");
+                                    getMainErrorMessage("invalidpassw","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
+                                    getMainErrorMessage("micpassw","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
+                                    getMainErrorMessage("marepassw","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
+                                    getMainErrorMessage("identicpasswnume","Parola este asemanatoare  cu numele!");
+                                    getMainErrorMessage("identicpasswprenume","Parola este asemanatoare  cu prenumele!");
+                                    getMainErrorMessage("passwdother","Parola este diferita fata de cofirmare parola!");
                                     ?>
                                 </small>
                             </div>
@@ -166,10 +166,10 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                                 <input type="password" name="passw-repeat" class="form-control">
                                 <small class="form-text alert-note">
                                     <?php
-                                    erore1("emptyfieldpassrepeat","Completeaza toate campurile!");
-                                    erore1("micpasswrepeat","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
-                                    erore1("marepasswrepeat","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
-                                    erore1("invalidpasswrepeat","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
+                                    getMainErrorMessage("emptyfieldpassrepeat","Completeaza toate campurile!");
+                                    getMainErrorMessage("micpasswrepeat","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
+                                    getMainErrorMessage("marepasswrepeat","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
+                                    getMainErrorMessage("invalidpasswrepeat","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
                                     ?>
                                 </small>
                             </div>
