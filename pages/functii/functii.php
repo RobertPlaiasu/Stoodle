@@ -1,42 +1,43 @@
 <?php
 
-function getMainErrorMessage($errorType, $message)
-{
-    if(isset($_GET['error']) && $_GET['error']==$errorType){
-      echo $message;
-    }
+function getMainErrorMessage ($errorType, $message) {
+
+  if(isset($_GET['error']) && $_GET['error']==$errorType)
+    echo $message;
+    
 }
 
-function getSecondErrorMessage($errorType, $message)
-{
-    if(isset($_GET['error']) && $_GET['error']==$errorType){
-      echo '<div class="alert alert-danger" role="alert">'.$message.'</div>';
-    }
+function getSecondErrorMessage ($errorType, $message) {
+
+  if(isset($_GET['error']) && $_GET['error']==$errorType)
+    echo '<div class="alert alert-danger" role="alert">'.$message.'</div>';
+    
 }
-function getSuccesMessage($succesType, $message)
-{
-    if(isset($_GET['succes']) && $_GET['succes']==$succesType){
-      echo '<div class="alert alert-success" role="alert">'.$message.'</div>';
-    }
+function getSuccesMessage ($succesType, $message) {
+
+  if(isset($_GET['succes']) && $_GET['succes']==$succesType)
+    echo '<div class="alert alert-success" role="alert">'.$message.'</div>';
+    
 }
 
-function binarySearch(Array $var, $nr)
-{
-	if (count($var) === 0) return false;
-	$nr_mic = 0;
-	$nr_mare = count($var) - 1;
-	while ($nr_mic <= $nr_mare) {
-		$nr_important = floor(($nr_mic + $nr_mare) / 2);
-		if($var[$nr_important] == $nr) {
-			return true;
-		}
-		if ($nr < $var[$nr_important]) {
-			$nr_mare = $nr_important -1;
-		}
-		else {
-			$nr_mic = $nr_important + 1;
-		}
-	}
+function binarySearch (Array $array, $target) {
+
+  if (count($array) === 0) return false;
+  
+	$leftBond = 0;
+  $rightBond = count($array) - 1;
+  
+	while ($leftBond <= $rightBond) {
+    $middleNumber = floor(($leftBond + $rightBond) / 2);
+    
+    if($array[$middleNumber] == $target)  return true;
+    
+		if ($nr < $var[$middleNumber])
+			$rightBond = $middleNumber -1;
+		else
+			$leftBond = $middleNumber + 1;
+  }
+  
 	return false;
 }
 
