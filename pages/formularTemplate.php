@@ -115,7 +115,7 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
             }
         </style>
       <?php
-      erore2('materii','Trebuie sa mai completezi inca o data formularul pentru ca ca 2 materii sunt asemanatoare!');
+      getSecondErrorMessage('materii','Trebuie sa mai completezi inca o data formularul pentru ca ca 2 materii sunt asemanatoare!');
        ?>
         <form action="./formular.php" method="post" id="formular">
 

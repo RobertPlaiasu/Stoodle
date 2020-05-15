@@ -31,31 +31,31 @@ include 'functii/functii.php';
                           getSecondErrorMessage("anothertoken","Tokenul este gresit")
                            ?>
                             <div class="col-lg-6">
-                              <?php
-                              $select=$_GET['select'];
-                              $token=$_GET['valid'];
-                              if(empty($select)||empty($token)){
-                                  header("Location: ./reset.php?error=invalidlink");
-                                  exit();
-                              }
-                              if(ctype_xdigit($select)===true && ctype_xdigit($token)===true){
-                                echo '<input type="hidden" name="select" value="'.$select.'">';
-                                echo '<input type="hidden" name="token" value="'.$token.'">';
-                              }
-                               ?>
+                                <?php
+                                    $select=$_GET['select'];
+                                    $token=$_GET['valid'];
+                                    if(empty($select)||empty($token)){
+                                        header("Location: ./reset.php?error=invalidlink");
+                                        exit();
+                                    }
+                                    if(ctype_xdigit($select)===true && ctype_xdigit($token)===true){
+                                        echo '<input type="hidden" name="select" value="'.$select.'">';
+                                        echo '<input type="hidden" name="token" value="'.$token.'">';
+                                    }
+                                ?>
 
                                 <label for="exampleInputPassword1">Parolă</label>
                                 <input type="password" name="resetparola" class="form-control">
                                 <small class="form-text alert-note">
                                     <?php
-                                    getMainErrorMessage("emptyfieldpassw","Completeaza toate campurile!");
-                                    getMainErrorMessage("invalidpassw","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
-                                    getMainErrorMessage("micpassw","Parola este prea scurta trebuie sa aiba minim 8 caractere!");
-                                    getMainErrorMessage("marepassw","Parola este prea lunga poate sa aiba maxim 48 de caractere!");
-                                    getMainErrorMessage("identicpasswnume","Parola este asemanatoare  cu numele!");
-                                    getMainErrorMessage("identicpasswprenume","Parola este asemanatoare  cu prenumele!");
-                                    getMainErrorMessage("difparola","Parola este diferita fata de cofirmare parola!");
-                                    getMainErrorMessage("aceeasiparola","Parola este asemanatoare cu cea veche!")
+                                        getMainErrorMessage("emptyfieldpassw","Completeaza toate campurile!");
+                                        getMainErrorMessage("invalidpassw","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
+                                        getMainErrorMessage("micpassw","Parola este prea scurta trebuie sa aiba minim 8 caractere!");
+                                        getMainErrorMessage("marepassw","Parola este prea lunga poate sa aiba maxim 48 de caractere!");
+                                        getMainErrorMessage("identicpasswnume","Parola este asemanatoare  cu numele!");
+                                        getMainErrorMessage("identicpasswprenume","Parola este asemanatoare  cu prenumele!");
+                                        getMainErrorMessage("difparola","Parola este diferita fata de cofirmare parola!");
+                                        getMainErrorMessage("aceeasiparola","Parola este asemanatoare cu cea veche!")
                                     ?>
                                 </small>
                             </div>
@@ -65,10 +65,10 @@ include 'functii/functii.php';
                                 <input type="password" name="resetconfirmareparola" class="form-control">
                                 <small class="form-text alert-note">
                                     <?php
-                                    getMainErrorMessage("emptyfieldpasswrepeat","Completeaza toate campurile!");
-                                    getMainErrorMessage("invalidpasswrepeat","Pentru repetare parola se pot folosi doar cifre si litere ale alfabetului englez!");
-                                    getMainErrorMessage("micpasswrepeat","Repetare parola este prea scurta trebuie sa aiba minim 8 caractere!");
-                                    getMainErrorMessage("marepasswrepeat","Parola este prea lunga poate sa aiba maxim 48 de caractere!");
+                                        getMainErrorMessage("emptyfieldpasswrepeat","Completeaza toate campurile!");
+                                        getMainErrorMessage("invalidpasswrepeat","Pentru repetare parola se pot folosi doar cifre si litere ale alfabetului englez!");
+                                        getMainErrorMessage("micpasswrepeat","Repetare parola este prea scurta trebuie sa aiba minim 8 caractere!");
+                                        getMainErrorMessage("marepasswrepeat","Parola este prea lunga poate sa aiba maxim 48 de caractere!");
                                     ?>
                                 </small>
                             </div>
@@ -79,5 +79,4 @@ include 'functii/functii.php';
             </div>
         </div>
     </body>
-
 </html>

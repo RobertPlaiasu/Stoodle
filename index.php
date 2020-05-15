@@ -1,67 +1,64 @@
 <?php
-   require './pages/folderlogin/datacon.php';
-   
-   function destroyCookie($selector,$token){
-       setcookie("select", "",-60*60*24*30,"/");
-       setcookie("validator","",-60*60*24*30,"/");
-       header('Refresh: 1; url=index.php');
-       exit();
-   }
-   session_start();
-   if (isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail']))
-   {
-       header("Location: ./pages/homePage.php");
-       exit();
-   }
-   elseif(isset($_COOKIE['select']) && isset($_COOKIE['validator'])){
-       if(ctype_xdigit($_COOKIE['select']) && ctype_xdigit($_COOKIE['validator'])){
-           $mysql='SELECT * FROM auth WHERE selector=?';
-           $stmt = mysqli_stmt_init($connection);
-           if (!mysqli_stmt_prepare($stmt, $mysql))
-           {
-               destroyCookie($_COOKIE['select'],$_COOKIE['validator']);
-           }
-           mysqli_stmt_bind_param($stmt, "s", $_COOKIE['select']);
-           mysqli_stmt_execute($stmt);
-           $check = mysqli_stmt_get_result($stmt);
-           if ($valori = mysqli_fetch_assoc($check))
-           {
-   
-               $password_verify=password_verify($_COOKIE['validator'],$valori['validator']);
-               if($password_verify===true){
-   
-                   /*aici pun sesiunile*/
-                   $mysql="SELECT * FROM users WHERE idUser=".$valori['userid'];
-                   $result=mysqli_query($connection,$mysql);
-                   if(mysqli_num_rows($result)!=1){
-                       destroyCookie($_COOKIE['select'],$_COOKIE['validator']);
-                   }
-                   if($rezultat = $result->fetch_assoc()){
-                       $_SESSION['mailUser']=$rezultat['mailUser'];
-   
-                       /*aici se termina sesiunile*/
-   
-                       /*aici incepe resetarea cookieurilor*/
-                       $selector=bin2hex(random_bytes(24));
-                       $token=bin2hex(random_bytes(64));
-                       $hash=password_hash($token,PASSWORD_DEFAULT);
-                       $mysql="UPDATE auth(validator,selector) VALUES (".$hash.",".$selector.")";
-                       mysqli_query($connection,$mysql);
-   
-                       setcookie("select", $selector,$valori['data'],"/");
-                       setcookie("validator",$token,$valori['data'],"/");
-   
-                       header("Location: ./pages/homePage.php");
-                       exit();
-                     }
-                   else destroyCookie($_COOKIE['select'],$_COOKIE['validator']);
-               }
-               else  destroyCookie($_COOKIE['select'],$_COOKIE['validator']);
-           }
-           else destroyCookie($_COOKIE['select'],$_COOKIE['validator']);
-       }
-       else destroyCookie($_COOKIE['select'],$_COOKIE['validator']);
-   
+    require './pages/folderlogin/datacon.php';
+    
+    function destroyCookie($selector,$token){
+        setcookie("select", "",-60*60*24*30,"/");
+        setcookie("validator","",-60*60*24*30,"/");
+        header('Refresh: 1; url=index.php');
+        exit();
+    }
+    session_start();
+    if (isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail']))
+    {
+        header("Location: ./pages/homePage.php");
+        exit();
+    }
+
+    if(isset($_COOKIE['select']) && isset($_COOKIE['validator'])){
+
+        if(!(ctype_xdigit($_COOKIE['select']) && ctype_xdigit($_COOKIE['validator'])))
+            destroyCookie($_COOKIE['select'],$_COOKIE['validator']);
+            
+        $mysql='SELECT * FROM auth WHERE selector=?';
+        $stmt = mysqli_stmt_init($connection);
+        if (!mysqli_stmt_prepare($stmt, $mysql))
+        {
+            destroyCookie($_COOKIE['select'],$_COOKIE['validator']);
+        }
+        mysqli_stmt_bind_param($stmt, "s", $_COOKIE['select']);
+        mysqli_stmt_execute($stmt);
+        $check = mysqli_stmt_get_result($stmt);
+        if (!($valori = mysqli_fetch_assoc($check)))
+            destroyCookie($_COOKIE['select'],$_COOKIE['validator']);
+
+        $password_verify=password_verify($_COOKIE['validator'],$valori['validator']);
+        if($password_verify !==true)
+        destroyCookie($_COOKIE['select'],$_COOKIE['validator']);
+
+        /*aici pun sesiunile*/
+        $mysql="SELECT * FROM users WHERE idUser=".$valori['userid'];
+        $result=mysqli_query($connection,$mysql);
+
+        if(mysqli_num_rows($result)!=1 || !($rezultat = $result->fetch_assoc())){
+            destroyCookie($_COOKIE['select'],$_COOKIE['validator']);
+        }
+
+        $_SESSION['mailUser']=$rezultat['mailUser'];
+
+        /*aici se termina sesiunile*/
+
+        /*aici incepe resetarea cookieurilor*/
+        $selector=bin2hex(random_bytes(24));
+        $token=bin2hex(random_bytes(64));
+        $hash=password_hash($token,PASSWORD_DEFAULT);
+        $mysql="UPDATE auth(validator,selector) VALUES (".$hash.",".$selector.")";
+        mysqli_query($connection,$mysql);
+
+        setcookie("select", $selector,$valori['data'],"/");
+        setcookie("validator",$token,$valori['data'],"/");
+
+        header("Location: ./pages/homePage.php");
+        exit();
    }
    ?>
 <!DOCTYPE html>
