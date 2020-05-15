@@ -36,34 +36,32 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
 
                     <form action="folderlogin/signupphp.php" method="post">
                         <div class="form-group row">
-                          <?php
-                          getSecondErrorMessage("mysqlerror","Eroare baza de date!");
-                          getSecondErrorMessage("invalidlink","Link-ul este invalid!");
-                          getSecondErrorMessage("expire","Timpul pentru verificarea adresei de email a fost depasit trebuie sa completezi din nou formularul!");
-                          getSecondErrorMessage("alttoken","Tokenul nu este bun!");
-                          getSecondErrorMessage("eroaregenerala","Eroare aplicatie!");
-                          getSuccesMessage("register","Te-ai inregistrat cu succes!Acum verifica adresa ta de email!");
-                           ?>
+                            <?php
+                                getSecondErrorMessage("mysqlerror","Eroare baza de date!");
+                                getSecondErrorMessage("invalidlink","Link-ul este invalid!");
+                                getSecondErrorMessage("expire","Timpul pentru verificarea adresei de email a fost depasit trebuie sa completezi din nou formularul!");
+                                getSecondErrorMessage("alttoken","Tokenul nu este bun!");
+                                getSecondErrorMessage("eroaregenerala","Eroare aplicatie!");
+                                getSuccesMessage("register","Te-ai inregistrat cu succes!Acum verifica adresa ta de email!");
+                            ?>
                             <div class="col-lg-6">
                                 <label for="exampleInputEmail1">Nume de familie</label>
 
                                 <?php
-                                if(isset($_GET['nume'])){
-                                    echo '<input type="text" name="nume" class="form-control" aria-describedby="emailHelp" value="'.$_GET['nume'].'">';
-                                }
-                                else {
-                                    echo '<input type="text" name="nume" class="form-control" aria-describedby="emailHelp">';
-                                }
+                                    if(isset($_GET['nume'])){
+                                        echo '<input type="text" name="nume" class="form-control" aria-describedby="emailHelp" value="'.$_GET['nume'].'">';
+                                    }
+                                    else {
+                                        echo '<input type="text" name="nume" class="form-control" aria-describedby="emailHelp">';
+                                    }
                                 ?>
 
                                 <small class="form-text alert-note">
-
                                     <?php
                                     getMainErrorMessage("emptyfieldnume","Completeaza toate campurile!");
                                     getMainErrorMessage("invalidnume","Se pot folosi doar litere ale alfabetui englez!");
                                     getMainErrorMessage("marenume","Numele este prea lung");
                                     ?>
-
                                 </small>
 
                             </div>
@@ -72,24 +70,20 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                                 <label for="exampleInputEmail1">Prenume</label>
 
                                 <?php
-
-                                if(isset($_GET['prenume'])){
-                                    echo '<input type="text" name="prenume" class="form-control" value="'.$_GET['prenume'].'"aria-describedby="emailHelp">';
-                                }
-                                else {
-                                    echo '<input type="text" name="prenume" class="form-control" aria-describedby="emailHelp">';
-                                }
-
+                                    if(isset($_GET['prenume'])){
+                                        echo '<input type="text" name="prenume" class="form-control" value="'.$_GET['prenume'].'"aria-describedby="emailHelp">';
+                                    }
+                                    else {
+                                        echo '<input type="text" name="prenume" class="form-control" aria-describedby="emailHelp">';
+                                    }
                                 ?>
 
                                 <small class="form-text alert-note">
 
                                     <?php
-
-                                    getMainErrorMessage("emptyfieldprenume","Completeaza toate campurile!");
-                                    getMainErrorMessage("invalidprenume","Se pot folosi doar litere ale alfabetui englez!");
-                                    getMainErrorMessage("mareprenume","Numele este prea lung");
-
+                                        getMainErrorMessage("emptyfieldprenume","Completeaza toate campurile!");
+                                        getMainErrorMessage("invalidprenume","Se pot folosi doar litere ale alfabetui englez!");
+                                        getMainErrorMessage("mareprenume","Numele este prea lung");
                                     ?>
 
                                 </small>
@@ -101,13 +95,12 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                                 <label for="exampleInputEmail1">Email</label>
 
                                 <?php
-
-                                if(isset($_GET['email'])){
-                                    echo '<input type="email" name="email" class="form-control" value="'.$_GET['email'].'" aria-describedby="emailHelp">';
-                                }
-                                else {
-                                    echo '<input type="email" name="email" class="form-control" aria-describedby="emailHelp">';
-                                }
+                                    if(isset($_GET['email'])){
+                                        echo '<input type="email" name="email" class="form-control" value="'.$_GET['email'].'" aria-describedby="emailHelp">';
+                                    }
+                                    else {
+                                        echo '<input type="email" name="email" class="form-control" aria-describedby="emailHelp">';
+                                    }
                                 ?>
 
                                 <small class="form-text alert-note">
@@ -126,19 +119,17 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                                 <label for="exampleInputEmail1">Confirmare Email</label>
 
                                 <?php
-                                if(isset($_GET['confirmail'])){
-                                    echo '<input type="email" name="confirmail" class="form-control" value="'.$_GET['confirmail'].'" aria-describedby="emailHelp">';
-                                }
-                                else {
-                                    echo '<input type="email" name="confirmail" class="form-control" aria-describedby="emailHelp">';
-                                }
+                                    if(isset($_GET['confirmail'])){
+                                        echo '<input type="email" name="confirmail" class="form-control" value="'.$_GET['confirmail'].'" aria-describedby="emailHelp">';
+                                    }
+                                    else {
+                                        echo '<input type="email" name="confirmail" class="form-control" aria-describedby="emailHelp">';
+                                    }
                                 ?>
                                 <small class="form-text alert-note">
                                     <?php
-
-                                    getMainErrorMessage("emptyfieldemailrepeat","Completeaza toate campurile!");
-                                    getMainErrorMessage("invalidmailrepeat","Email-ul este invalid!");
-
+                                        getMainErrorMessage("emptyfieldemailrepeat","Completeaza toate campurile!");
+                                        getMainErrorMessage("invalidmailrepeat","Email-ul este invalid!");
                                     ?>
                                 </small>
                             </div>
@@ -150,13 +141,13 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                                 <input type="password" name="passw" class="form-control">
                                 <small class="form-text alert-note">
                                     <?php
-                                    getMainErrorMessage("emptyfieldpass","Completeaza toate campurile!");
-                                    getMainErrorMessage("invalidpassw","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
-                                    getMainErrorMessage("micpassw","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
-                                    getMainErrorMessage("marepassw","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
-                                    getMainErrorMessage("identicpasswnume","Parola este asemanatoare  cu numele!");
-                                    getMainErrorMessage("identicpasswprenume","Parola este asemanatoare  cu prenumele!");
-                                    getMainErrorMessage("passwdother","Parola este diferita fata de cofirmare parola!");
+                                        getMainErrorMessage("emptyfieldpass","Completeaza toate campurile!");
+                                        getMainErrorMessage("invalidpassw","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
+                                        getMainErrorMessage("micpassw","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
+                                        getMainErrorMessage("marepassw","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
+                                        getMainErrorMessage("identicpasswnume","Parola este asemanatoare  cu numele!");
+                                        getMainErrorMessage("identicpasswprenume","Parola este asemanatoare  cu prenumele!");
+                                        getMainErrorMessage("passwdother","Parola este diferita fata de cofirmare parola!");
                                     ?>
                                 </small>
                             </div>
@@ -166,10 +157,10 @@ if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
                                 <input type="password" name="passw-repeat" class="form-control">
                                 <small class="form-text alert-note">
                                     <?php
-                                    getMainErrorMessage("emptyfieldpassrepeat","Completeaza toate campurile!");
-                                    getMainErrorMessage("micpasswrepeat","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
-                                    getMainErrorMessage("marepasswrepeat","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
-                                    getMainErrorMessage("invalidpasswrepeat","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
+                                        getMainErrorMessage("emptyfieldpassrepeat","Completeaza toate campurile!");
+                                        getMainErrorMessage("micpasswrepeat","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
+                                        getMainErrorMessage("marepasswrepeat","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
+                                        getMainErrorMessage("invalidpasswrepeat","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
                                     ?>
                                 </small>
                             </div>

@@ -93,10 +93,10 @@ sort($favorite);
         <nav class="navbar navbar-expand-lg navbar-light">
             <a href="#">
                 <?php
-                if (isset($row['prenumeGmail']))
-                    print "Salut, ".$row['prenumeGmail'];
-                if (isset($row['Prenume']))
-                    print "Salut, ".$row['Prenume'];
+                    if (isset($row['prenumeGmail']))
+                        print "Salut, ".$row['prenumeGmail'];
+                    if (isset($row['Prenume']))
+                        print "Salut, ".$row['Prenume'];
                 ?>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -169,7 +169,7 @@ sort($favorite);
                         <!--Print the proprities-->
                         <div class="row-lg-2 name">
                             <?php
-                        echo $card->nume;
+                                echo $card->nume;
                             ?>
                         </div>
                         <div class="row-lg-3 prop text-center">
@@ -177,19 +177,19 @@ sort($favorite);
                                 <div class="row">
                                     <div class="col">
                                         <?php
-                        echo $card->universitate;
+                                            echo $card->universitate;
                                         ?>
                                     </div>
                                 </div>
                                 <div class="row justify-content-between">
                                     <div class="col">
                                         <?php
-                        echo $card->compabilitate
+                                            echo $card->compabilitate
                                         ?>
                                         <i class="fas fa-percentage"></i></div>
                                     <div class="col">
                                         <?php
-                            echo $card->judet;
+                                            echo $card->judet;
                                         ?>
                                         <i class="fas fa-city"></i>
                                     </div>
@@ -197,7 +197,7 @@ sort($favorite);
                                 <div class="row">
                                     <div class="col">
                                         <?php
-                        echo $card->profil;
+                                            echo $card->profil;
                                         ?>
                                         <i class="fas fa-code-branch"></i>
                                     </div>
@@ -207,19 +207,19 @@ sort($favorite);
                         <div class="row-lg-3 fav text-center">
                             <form action="./favoriteAlg.php" method="post">
                                 <?php
-                        if(binarySearch($favorite, $card->Indexf))
-                            echo '<button type="submit" style="all: unset" name="scoatere" id="'.$card->Indexf.'" value="'.$card->Indexf.'"><i class="fas fa-heart"></i> Scoate de la favorite</button>';
-                        else
-                            echo '<button type="submit" style="all: unset" name="adaugare" id="'.$card->Indexf.'" value="'.$card->Indexf.'"><i class="far fa-heart"></i> Adauga la favorite</button>';
+                                    if(binarySearch($favorite, $card->Indexf))
+                                        echo '<button type="submit" style="all: unset" name="scoatere" id="'.$card->Indexf.'" value="'.$card->Indexf.'"><i class="fas fa-heart"></i> Scoate de la favorite</button>';
+                                    else
+                                        echo '<button type="submit" style="all: unset" name="adaugare" id="'.$card->Indexf.'" value="'.$card->Indexf.'"><i class="far fa-heart"></i> Adauga la favorite</button>';
                                 ?>
                             </form>
                         </div>
                         <div class="row-lg-3 extra text-center">
                             <a href="
-                                     <?php
-                        echo $card->link;
-                                     ?>
-                                     " target="_blank">Afla mai mult</a>
+                                <?php
+                                echo $card->link;
+                                ?>
+                                " target="_blank">Afla mai mult</a>
                         </div>
                     </div>
                     <?php } ?>

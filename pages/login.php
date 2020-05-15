@@ -40,29 +40,29 @@ if (isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])) {
                         <div class="form-group">
 
                             <?php
-                            getSecondErrorMessage("sqlierror","Eroare server!");
-                            getSecondErrorMessage("fatalerrorsql","Eroare aplicatie!");
-                            getSuccesMessage("resetare","Parola a fost schimbata");
-                            getSuccesMessage("register","Verifica adresa de email pentru a te putea loga!");
+                                getSecondErrorMessage("sqlierror","Eroare server!");
+                                getSecondErrorMessage("fatalerrorsql","Eroare aplicatie!");
+                                getSuccesMessage("resetare","Parola a fost schimbata");
+                                getSuccesMessage("register","Verifica adresa de email pentru a te putea loga!");
                             ?>
 
                             <label for="exampleInputEmail1">Email</label>
 
                             <?php
-                            if(isset($_GET['mailuserid'])){
-                                echo '<input type="email" name="mailus" class="form-control" value="'.$_GET['mailuserid'].'" id="exampleInputEmail1" aria-describedby="emailHelp">';
-                            }
-                            else {
-                                echo '<input type="email" name="mailus" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">';
-                            }
+                                if(isset($_GET['mailuserid'])){
+                                    echo '<input type="email" name="mailus" class="form-control" value="'.$_GET['mailuserid'].'" id="exampleInputEmail1" aria-describedby="emailHelp">';
+                                }
+                                else {
+                                    echo '<input type="email" name="mailus" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">';
+                                }
                             ?>
 
                             <small id="emailHelp" class="form-text alert-note">
 
                                 <?php
-                                getMainErrorMessage("emptymail",'Completeaza campul !');
-                                getMainErrorMessage("nuUser",'Email-ul nu a fot gasit!');
-                                getMainErrorMessage("invalidmailuserid",'Email-ul este invalid!');
+                                    getMainErrorMessage("emptymail",'Completeaza campul !');
+                                    getMainErrorMessage("nuUser",'Email-ul nu a fot gasit!');
+                                    getMainErrorMessage("invalidmailuserid",'Email-ul este invalid!');
                                 ?>
 
                             </small>
@@ -75,9 +75,9 @@ if (isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])) {
                             <input type="password" name="passw" class="form-control" id="exampleInputPassword1">
                             <small id="emailHelp" class="form-text alert-note">
                                 <?php
-                                getMainErrorMessage("emptypass","Completeaza campul");
-                                getMainErrorMessage("invalidpassw","Pentru parola se folosesc doar caractere a alfabetui englez si cifrele de la 0-9!");
-                                getMainErrorMessage("parolagresita","Combinatia email si parola este gresita");
+                                    getMainErrorMessage("emptypass","Completeaza campul");
+                                    getMainErrorMessage("invalidpassw","Pentru parola se folosesc doar caractere a alfabetui englez si cifrele de la 0-9!");
+                                    getMainErrorMessage("parolagresita","Combinatia email si parola este gresita");
                                 ?>
                             </small>
 

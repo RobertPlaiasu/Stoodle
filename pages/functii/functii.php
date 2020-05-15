@@ -32,7 +32,7 @@ function binarySearch (Array $array, $target) {
     
     if($array[$middleNumber] == $target)  return true;
     
-		if ($nr < $var[$middleNumber])
+		if ($target < $array[$middleNumber])
 			$rightBond = $middleNumber -1;
 		else
 			$leftBond = $middleNumber + 1;

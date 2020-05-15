@@ -129,6 +129,7 @@ if (!mysqli_stmt_prepare($stmt,$mysql)) {
   header("Location: ../newparola.php?error=mysqlerror&select=".$select."&valid=".$token);
   exit();
 }
+
 $hash=password_hash($parola,PASSWORD_DEFAULT);
 mysqli_stmt_bind_param($stmt,"ss",$hash,$rand['mailReset']);
 mysqli_stmt_execute($stmt);
