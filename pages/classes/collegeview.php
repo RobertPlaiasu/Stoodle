@@ -1,6 +1,6 @@
 <?php
 
-class CollegeView extends College 
+class College_View extends College 
 {
 
     public function getColleges(array $results) 

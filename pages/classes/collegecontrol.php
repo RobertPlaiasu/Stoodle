@@ -1,6 +1,6 @@
 <?php
 
-class CollegeControl extends College {
+class College_Control extends College {
 
 
 }
