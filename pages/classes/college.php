@@ -15,8 +15,8 @@ class College extends Database
     private $getCompabilityCollege;
     private $linkCollege;
 
-    function __constructor(){
-        
+    function __construct(){
+
     }
 
     private function getCollege() :array
