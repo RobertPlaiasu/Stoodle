@@ -77,7 +77,8 @@ class User extends Database
     {
 
         
-        
+        $this->checkConnectedUserEmpty();
+
         $arrayUserInformation = $this->searchConnectedUser();
 
         //verify if the formular is completed
@@ -110,16 +111,27 @@ class User extends Database
 
     }
 
-    protected function collegeAndUserCompability (int $jobCollege)
+    protected function collegeAndUserCompability (int $jobCollege,int $sportCollege,int $socialCollege,int $stressCollege,
+                                                  string $profilCollege,string $passionCollege,string $subject1College,
+                                                  string $subject2College,string $subject3College,string $countyCollege) :int
     {
         
         $compabilitySum = 0;
         $compabilityMax = 110;
 
         $compabilitySum += $this->compareSimpleElements($this->jobUser,$jobCollege);
-        $compabilitySum += $this->compareSimpleElements();
+        $compabilitySum += $this->compareSimpleElements($this->sportUser,$sportCollege);
+        $compabilitySum += $this->compareSimpleElements($this->socialUser,$socialCollege);
+        $compabilitySum += $this->compareSimpleElements($this->stressUser,$stressCollege);
 
+        $compabilitySum += $this->compareProfil($profilCollege);
+        $compabilitySum += $this->comparePassion($passionCollege);
+        $compabilitySum += $this->compareSubject($subject1College);
+        $compabilitySum += $this->compareSubject($subject2College);
+        $compabilitySum += $this->compareSubject($subject3College);
+        $compabilitySum += $this->compareCounty($countyCollege);
 
+        return floor(($compabilitySum/$compabilityMax) * 100);
         
     }
 
@@ -289,7 +301,6 @@ class User extends Database
         return 0;
 
     }
-
 
 
 }
