@@ -26,7 +26,6 @@ class User extends Database
     protected $emailUser;
     protected $typeUser;
 
-    protected $arrayUserInformation;
 
     function __construct(string $session,string $type)
     {
@@ -155,13 +154,13 @@ class User extends Database
     }
 
     // search 4 elements in an array
-    protected function foundInArrayMoreStrings (array $array, string $userString, string $collegeString1,
-                                              string $collegeString2, string $collegeString3) :bool
+    protected function foundInArrayMoreStrings (array $array, string $collegeString,string $userString1,
+                                              string $userString2,string $userString3) :bool
     {
         
-        if($this->foundInArray ($array, $userString, $collegeString1) ||
-           $this->foundInArray ($array, $userString, $collegeString2) ||
-           $this->foundInArray ($array, $userString, $collegeString3)) 
+        if($this->foundInArray ($array, $collegeString, $userString1) ||
+           $this->foundInArray ($array, $collegeString, $userString2) ||
+           $this->foundInArray ($array, $collegeString, $userString3)) 
                
             return true;  
 
@@ -170,8 +169,7 @@ class User extends Database
 
     }
 
-    protected function compareSubject (string $userString, string $collegeString1,
-                                     string $collegeString2, string $collegeString3) :int
+    protected function compareSubject (string $collegeSubject) :int
     {
 
         $subjectBiology = array ("Chimie","Biologie","Fizica","Matematica");
@@ -182,15 +180,21 @@ class User extends Database
         $subjectPsychology = array ("Psihologie","Sociologie");
         $subjectGeografy = array ("Geografie","Istorie");
 
-        if($userString == $collegeString1 || $userString == $collegeString2 || $userString == $collegeString3)
+        if($this->subject1User == $collegeSubject || $this->subject2User == $collegeSubject || $this->subject3User == $collegeSubject)
             return 5;
 
-        if($this->foundInArrayMoreStrings ($subjectBiology, $userString, $collegeString1, $collegeString2, $collegeString3) ||
-           $this->foundInArrayMoreStrings ($subjectForeign, $userString, $collegeString1, $collegeString2, $collegeString3) ||
-           $this->foundInArrayMoreStrings ($subjectMath, $userString, $collegeString1, $collegeString2, $collegeString3) ||
-           $this->foundInArrayMoreStrings ($subjectComputerScience, $userString, $collegeString1, $collegeString2, $collegeString3) || 
-           $this->foundInArrayMoreStrings ($subjectPsychology, $userString, $collegeString1, $collegeString2, $collegeString3) ||
-           $this->foundInArrayMoreStrings ($subjectGeografy, $userString, $collegeString1, $collegeString2, $collegeString3)
+        if($this->foundInArrayMoreStrings ($subjectBiology, $collegeSubject, $this->subject1User,
+                                           $this->subject2User, $this->subject3User) ||
+           $this->foundInArrayMoreStrings ($subjectForeign, $collegeSubject, $this->subject1User,
+                                           $this->subject2User, $this->subject3User) ||
+           $this->foundInArrayMoreStrings ($subjectMath, $collegeSubject, $this->subject1User,
+                                           $this->subject2User, $this->subject3User) ||
+           $this->foundInArrayMoreStrings ($subjectComputerScience, $collegeSubject, $this->subject1User,
+                                           $this->subject2User, $this->subject3User) || 
+           $this->foundInArrayMoreStrings ($subjectPsychology, $collegeSubject, $this->subject1User,
+                                           $this->subject2User, $this->subject3User) ||
+           $this->foundInArrayMoreStrings ($subjectGeografy, $collegeSubject, $this->subject1User,
+                                           $this->subject2User, $this->subject3User)
           )
             return 3;
         
@@ -199,7 +203,7 @@ class User extends Database
 
     }
 
-    protected function comparePassion (string $userString,string $collegeString) :int
+    protected function comparePassion (string $collegePassion) :int
     {
 
         $passionPrograming = array ("Matematica","Programare/Calculatoare","Electronica","Cibernetica");
@@ -217,22 +221,22 @@ class User extends Database
         $passionReligion = array ("Religie","Istorie");
         $passionGeology  = array ("Geologie","Geografie","Biologie");
 
-        if($userString == $collegeString) 
+        if($this->passionUser == $collegePassion) 
             return $this->passionIntensityUser * 10;
 
-        if( $this->foundInArray ($passionPrograming, $userString, $collegeString) ||
-            $this->foundInArray ($passionIngeniring, $userString, $collegeString) ||
-            $this->foundInArray ($passionMedicine, $userString, $collegeString) ||
-            $this->foundInArray ($passionPolitics, $userString, $collegeString) ||
-            $this->foundInArray ($passionLinguistics, $userString, $collegeString) ||
-            $this->foundInArray ($passionJournalism, $userString, $collegeString) ||
-            $this->foundInArray ($passionGeografy, $userString, $collegeString) ||
-            $this->foundInArray ($passionSport, $userString, $collegeString) ||
-            $this->foundInArray ($passionBussines, $userString, $collegeString) ||
-            $this->foundInArray ($passionMilitary, $userString, $collegeString) ||
-            $this->foundInArray ($passionDesign, $userString, $collegeString) ||
-            $this->foundInArray ($passionReligion, $userString, $collegeString) ||
-            $this->foundInArray ($passionGeology, $userString, $collegeString) )
+        if( $this->foundInArray ($passionPrograming, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionIngeniring, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionMedicine, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionPolitics, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionLinguistics, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionJournalism, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionGeografy, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionSport, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionBussines, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionMilitary, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionDesign, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionReligion, $this->passionUser, $collegePassion) ||
+            $this->foundInArray ($passionGeology, $this->passionUser, $collegePassion) )
       
             return $this->passionIntensityUser * 5;
   
@@ -240,7 +244,7 @@ class User extends Database
 
     }
 
-    protected function compareCounty(string $userString,string $collegeString) :int
+    protected function compareCounty(string $collegeCounty) :int
     {
 
         $countySud = array("Ilfov","Prahova","Teleorman","Giurgiu","Calarasi","Constanta","Tulcea","Braila",
@@ -251,13 +255,13 @@ class User extends Database
                                  );
         $countyMoldova = array("Galati","Vrancea","Bacau","Iasi","Neamt","Suceava","Botosani","Harghita","Brasov","Covasna");
 
-        if($userString == $collegeString) 
+        if($this->countyUser == $collegeCounty) 
             return 10;
 
 
-        if($this->foundInArray ($countySud, $userString, $collegeString) ||
-           $this->foundInArray ($countyTransilvania, $userString, $collegeString) || 
-           $this->foundInArray ($countyMoldova, $userString, $collegeString) 
+        if($this->foundInArray ($countySud, $this->countyUser, $collegeCounty) ||
+           $this->foundInArray ($countyTransilvania, $this->countyUser, $collegeCounty) || 
+           $this->foundInArray ($countyMoldova, $this->countyUser, $collegeCounty) 
           ) 
             return 3;
 
@@ -266,18 +270,18 @@ class User extends Database
 
     }
 
-    protected function compareProfil (string $userString,string $collegeString) :int
+    protected function compareProfil (string $collegeProfil) :int
     {
 
         $profilFilo = array("Filologie","Stiinte-sociale");
         $profilMath = array("Mate-info","Stiinte ale naturii");
 
-        if($valoare_user == $valoare) 
+        if($this->profilUser == $collegeProfil) 
 
             return 10;
 
-        if($this->foundInArray ($profilFilo, $userString, $collegeString) || 
-           $this->foundInArray ($profilMath, $userString, $collegeString)
+        if($this->foundInArray ($profilFilo, $this->profilUser, $collegeProfil) || 
+           $this->foundInArray ($profilMath, $this->profilUser, $collegeProfil)
           ) 
 
             return 5;
