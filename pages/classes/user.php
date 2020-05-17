@@ -200,25 +200,72 @@ class User extends Database
         $passionReligion = array ("Religie","Istorie");
         $passionGeology  = array ("Geologie","Geografie","Biologie");
 
-  if($valoare_user == $valoare) return $this->passionIntensityUser * 10;
+        if($userString == $collegeString) 
+            return $this->passionIntensityUser * 10;
 
-  if( $this->foundInArray ($passionPrograming, $userString, $collegeString) ||
-      $this->foundInArray ($passionIngeniring, $userString, $collegeString) ||
-      $this->foundInArray ($passionMedicine, $userString, $collegeString) ||
-      $this->foundInArray ($passionPolitics, $userString, $collegeString) ||
-      $this->foundInArray ($passionLinguistics, $userString, $collegeString) ||
-      $this->foundInArray ($passionJournalism, $userString, $collegeString) ||
-      $this->foundInArray ($passionGeografy, $userString, $collegeString) ||
-      $this->foundInArray ($passionSport, $userString, $collegeString) ||
-      $this->foundInArray ($passionBussines, $userString, $collegeString) ||
-      $this->foundInArray ($passionMilitary, $userString, $collegeString) ||
-      $this->foundInArray ($passionDesign, $userString, $collegeString) ||
-      $this->foundInArray ($passionReligion, $userString, $collegeString) ||
-      $this->foundInArray ($passionGeology, $userString, $collegeString) )
+        if( $this->foundInArray ($passionPrograming, $userString, $collegeString) ||
+            $this->foundInArray ($passionIngeniring, $userString, $collegeString) ||
+            $this->foundInArray ($passionMedicine, $userString, $collegeString) ||
+            $this->foundInArray ($passionPolitics, $userString, $collegeString) ||
+            $this->foundInArray ($passionLinguistics, $userString, $collegeString) ||
+            $this->foundInArray ($passionJournalism, $userString, $collegeString) ||
+            $this->foundInArray ($passionGeografy, $userString, $collegeString) ||
+            $this->foundInArray ($passionSport, $userString, $collegeString) ||
+            $this->foundInArray ($passionBussines, $userString, $collegeString) ||
+            $this->foundInArray ($passionMilitary, $userString, $collegeString) ||
+            $this->foundInArray ($passionDesign, $userString, $collegeString) ||
+            $this->foundInArray ($passionReligion, $userString, $collegeString) ||
+            $this->foundInArray ($passionGeology, $userString, $collegeString) )
       
-      return $this->passionIntensityUser * 5;
+            return $this->passionIntensityUser * 5;
   
-  return 0;
+        return 0;
+
+    }
+
+    protected function compareCounty(string $userString,string $collegeString) :int
+    {
+
+        $countySud = array("Ilfov","Prahova","Teleorman","Giurgiu","Calarasi","Constanta","Tulcea","Braila",
+                         "Buzau","Bucuresti","Dambovita","Arges","Valcea","Gorj","Mehedinti","Dolj","Brasov"
+                        );
+        $countyTransilvania = array("Satu-Mare","Maramures","Bihor","Arad","Timis","Caras-Severin","Hunedoara",
+                                  "Alba","Cluj","Salaj","Sibiu","Brasov","Covasna","Harghita","Mures","Bistrita-Nasaud",
+                                 );
+        $countyMoldova = array("Galati","Vrancea","Bacau","Iasi","Neamt","Suceava","Botosani","Harghita","Brasov","Covasna");
+
+        if($userString == $collegeString) 
+            return 10;
+
+
+        if($this->foundInArray ($countySud, $userString, $collegeString) ||
+           $this->foundInArray ($countyTransilvania, $userString, $collegeString) || 
+           $this->foundInArray ($countyMoldova, $userString, $collegeString) 
+          ) 
+            return 3;
+
+        
+        return 0;
+
+    }
+
+    protected function compareProfil (string $userString,string $collegeString) :int
+    {
+
+        $profilFilo = array("Filologie","Stiinte-sociale");
+        $profilMath = array("Mate-info","Stiinte ale naturii");
+
+        if($valoare_user == $valoare) 
+
+            return 10;
+
+        if($this->foundInArray ($profilFilo, $userString, $collegeString) || 
+           $this->foundInArray ($profilMath, $userString, $collegeString)
+          ) 
+
+            return 5;
+
+        return 0;
 
     }
 
