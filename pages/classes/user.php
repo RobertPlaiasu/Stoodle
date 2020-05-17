@@ -4,7 +4,6 @@
 class User extends Database
 {
     
-    public $idUser;
     public $firstNameUser;
     public $lastNameUser;
     public $profilUser;
@@ -22,7 +21,8 @@ class User extends Database
     public $pictureUser;
 
     public $arrayColleges;
-    
+
+    protected $idUser;
     protected $emailUser;
     protected $typeUser;
 
@@ -109,7 +109,7 @@ class User extends Database
 
     }
 
-    private function collegeAndUserCompability ()
+    protected function collegeAndUserCompability ()
     {
         
         
@@ -117,7 +117,7 @@ class User extends Database
 
 
 
-    private function getAllColleges () :array
+    protected function getAllColleges () :array
     {
 
         $mysql = 'SELECT * FROM college';
@@ -129,7 +129,7 @@ class User extends Database
     }
 
     /*search 2 elements in an array*/ 
-    private function foundInArray (array $array, string $userString, string $collegeString) :bool
+    protected function foundInArray (array $array, string $userString, string $collegeString) :bool
     {
         if( in_array ($userString,$array) && in_array ($collegeString,$array) )
             return true;
@@ -138,7 +138,7 @@ class User extends Database
     }
 
     // search 4 elements in an array
-    private function foundInArrayMoreStrings (array $array, string $userString, string $collegeString1,
+    protected function foundInArrayMoreStrings (array $array, string $userString, string $collegeString1,
                                               string $collegeString2, string $collegeString3) :bool
     {
         
@@ -153,27 +153,28 @@ class User extends Database
 
     }
 
-    private function compareSubject (string $userString, string $collegeString1,
+    protected function compareSubject (string $userString, string $collegeString1,
                                      string $collegeString2, string $collegeString3) :int
     {
 
-        $subjectBiologie = array ("Chimie","Biologie","Fizica","Matematica");
-        $subjectStraine = array ("Engleza","Franceza","Germana","Spaniola","Latina");
-        $subjectMatematica = array ("Matematica","Fizica","Informatica");
-        $subjectInformatica = array ("TIC","Informatica","Matematica");
-        $subjectAntreprenor = array ("ATP","Economie","Educatie civica");
-        $subjectPsihologie = array ("Psihologie","Sociologie");
-        $subjectGeografie = array ("Geografie","Istorie");
+        $subjectBiology = array ("Chimie","Biologie","Fizica","Matematica");
+        $subjecForeign = array ("Engleza","Franceza","Germana","Spaniola","Latina");
+        $subjectMath = array ("Matematica","Fizica","Informatica");
+        $subjectComputerScience = array ("TIC","Informatica","Matematica");
+        $subjectBussines = array ("ATP","Economie","Educatie civica");
+        $subjectPsychology = array ("Psihologie","Sociologie");
+        $subjectGeografy = array ("Geografie","Istorie");
 
         if($userString == $collegeString1 || $userString == $collegeString2 || $userString == $collegeString3)
             return 5;
 
-        if($this->foundInArrayMoreStrings ($subjectBiologie, $userString, $collegeString1, $collegeString2, $collegeString3) ||
-           $this->foundInArrayMoreStrings ($subjectStraine, $userString, $collegeString1, $collegeString2, $collegeString3) ||
-           $this->foundInArrayMoreStrings ($subjectMatematica, $userString, $collegeString1, $collegeString2, $collegeString3) ||
-           $this->foundInArrayMoreStrings ($subjectInformatica, $userString, $collegeString1, $collegeString2, $collegeString3) || 
-           $this->foundInArrayMoreStrings ($subjectAntreprenor, $userString, $collegeString1, $collegeString2, $collegeString3) ||
-        )
+        if($this->foundInArrayMoreStrings ($subjectBiology, $userString, $collegeString1, $collegeString2, $collegeString3) ||
+           $this->foundInArrayMoreStrings ($subjectForeign, $userString, $collegeString1, $collegeString2, $collegeString3) ||
+           $this->foundInArrayMoreStrings ($subjectMath, $userString, $collegeString1, $collegeString2, $collegeString3) ||
+           $this->foundInArrayMoreStrings ($subjectComputerScience, $userString, $collegeString1, $collegeString2, $collegeString3) || 
+           $this->foundInArrayMoreStrings ($subjectPsychology, $userString, $collegeString1, $collegeString2, $collegeString3) ||
+           $this->foundInArrayMoreStrings ($subjectGeografy, $userString, $collegeString1, $collegeString2, $collegeString3)
+          )
             return 3;
         
         return 0;
@@ -181,8 +182,43 @@ class User extends Database
 
     }
 
-    private function comparePassion () :int
+    protected function comparePassion (string $userString,string $collegeString) :int
     {
+
+        $passionPrograming = array ("Matematica","Programare/Calculatoare","Electronica","Cibernetica");
+        $passionIngeniring = array ("Matematica","Fizica","Astronomie","Arhitectura","Constructii","Inginerie electrica",
+                                    "Electronica","Inginerie Aerospatila");
+        $passionMedicine = array ("Chimie","Medicina","Biologie","Animale","Agricultura","Ecologie","Animale");
+        $passionPolitics = array ("Politica","Drept");
+        $passionLinguistics = array ("Limbi straine","Literatura","Limba romana","Filozofie","Psihologie");
+        $passionJournalism = array ("Jurnalism","Editare video/sunet","Regie","Actorie");
+        $passionGeografy = array ("Geografie","Istorie");
+        $passionSport = array ("Biologie","Medicina","Sport");
+        $passionBussines = array ("Business","Economie","Matematica");
+        $passionMilitary = array ("Drept","Serviciul in cadrul politiei","Serviciul militar");
+        $passionDesign = array ("Design","Desen","Editare video/sunet");
+        $passionReligion = array ("Religie","Istorie");
+        $passionGeology  = array ("Geologie","Geografie","Biologie");
+
+  if($valoare_user == $valoare) return $this->passionIntensityUser * 10;
+
+  if( $this->foundInArray ($passionPrograming, $userString, $collegeString) ||
+      $this->foundInArray ($passionIngeniring, $userString, $collegeString) ||
+      $this->foundInArray ($passionMedicine, $userString, $collegeString) ||
+      $this->foundInArray ($passionPolitics, $userString, $collegeString) ||
+      $this->foundInArray ($passionLinguistics, $userString, $collegeString) ||
+      $this->foundInArray ($passionJournalism, $userString, $collegeString) ||
+      $this->foundInArray ($passionGeografy, $userString, $collegeString) ||
+      $this->foundInArray ($passionSport, $userString, $collegeString) ||
+      $this->foundInArray ($passionBussines, $userString, $collegeString) ||
+      $this->foundInArray ($passionMilitary, $userString, $collegeString) ||
+      $this->foundInArray ($passionDesign, $userString, $collegeString) ||
+      $this->foundInArray ($passionReligion, $userString, $collegeString) ||
+      $this->foundInArray ($passionGeology, $userString, $collegeString) )
+      
+      return $this->passionIntensityUser * 5;
+  
+  return 0;
 
     }
 
