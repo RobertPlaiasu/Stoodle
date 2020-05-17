@@ -36,10 +36,10 @@ class User extends Database
     }
 
     //check if session exists
-    public function checkConnectedUserIsset (string $session, string $type) :void
+    public function checkConnectedUserIsset () :void
     {
 
-        if( isset($session) && isset($type) )
+        if( isset($this->emailUser) && isset($this->typeUser) )
         {
             header("Location: ../homePage.php");
             exit();
@@ -48,25 +48,25 @@ class User extends Database
     }
 
     //check if session doesn't exist 
-    public function checkConnectedUserEmpty (string $session, string $type) :void
+    public function checkConnectedUserEmpty () :void
     {
 
-        if(empty($session) && empty($type))
+        if(empty($this->emailUser) && empty($this->typeUser))
         {
-            header("Location: ../homePage.php");
+            header("Location: ../index.php");
             exit();
         }
     
     }
 
     //search for data of the user in the table users
-    protected function searchConnectedUser(string $session, string $type) :array
+    protected function searchConnectedUser() :array
     {
         
         $mysql = 'SELECT * FROM users WHERE mail_user= ? AND type_user= ?';
         $stmt = $this->connection()->prepare($mysql);
 
-        $stmt->execute( [$session, $type] );
+        $stmt->execute( [$this->emailUser, $this->typeUser] );
         $row = $stmt->fetch(); 
 
         return $row;
@@ -74,13 +74,15 @@ class User extends Database
     }
 
 
-    public function checkFormCompleted (string $session,string $type) :void
+    public function checkFormCompleted() :void
     {
 
-        $this->arrayUserInformation = $this->searchConnectedUser ($session,$type);
+        
+        
+        $arrayUserInformation = $this->searchConnectedUser();
 
         //verify if the formular is completed
-        if ( empty($this->arrayUserInformation['profil_user']))
+        if ( empty($arrayUserInformation['profil_user']))
         {
             header("Location: ./formularTemplate.php");
             exit();
@@ -88,30 +90,37 @@ class User extends Database
         else 
         {
             //public all
-            $this->idUser = $this->arrayUserInformation['id_user'];
-            $this->firstNameUser = $this->arrayUserInformation['first_name_user'];
-            $this->lastNameUser = $this->arrayUserInformation['name_user'];
-            $this->profilUser = $this->arrayUserInformation['profil_user'];
-            $this->passionUser = $this->arrayUserInformation['passion_user'];
-            $this->passionIntensityUser = $this->arrayUserInformation['passion_intensity_user'];
-            $this->jobUser = $this->arrayUserInformation['job_user'];
-            $this->subject1User = $this->arrayUserInformation['subject1_user'];
-            $this->subject2User = $this->arrayUserInformation['subject2_user'];
-            $this->subject3User = $this->arrayUserInformation['subject3_user'];
-            $this->booksUser = $this->arrayUserInformation['books_user'];
-            $this->sportUser = $this->arrayUserInformation['sport_user'];
-            $this->socialUser = $this->arrayUserInformation['social_user'];
-            $this->stressUser = $this->arrayUserInformation['stress_user'];
-            $this->countyUser = $this->arrayUserInformation['county_user'];
-            $this->pictureUser = $this->arrayUserInformation['picture_user'];
+            $this->idUser = $arrayUserInformation['id_user'];
+            $this->firstNameUser = $arrayUserInformation['first_name_user'];
+            $this->lastNameUser = $arrayUserInformation['name_user'];
+            $this->profilUser = $arrayUserInformation['profil_user'];
+            $this->passionUser = $arrayUserInformation['passion_user'];
+            $this->passionIntensityUser = $arrayUserInformation['passion_intensity_user'];
+            $this->jobUser = $arrayUserInformation['job_user'];
+            $this->subject1User = $arrayUserInformation['subject1_user'];
+            $this->subject2User = $arrayUserInformation['subject2_user'];
+            $this->subject3User = $arrayUserInformation['subject3_user'];
+            $this->booksUser = $arrayUserInformation['books_user'];
+            $this->sportUser = $arrayUserInformation['sport_user'];
+            $this->socialUser = $arrayUserInformation['social_user'];
+            $this->stressUser = $arrayUserInformation['stress_user'];
+            $this->countyUser = $arrayUserInformation['county_user'];
+            $this->pictureUser = $arrayUserInformation['picture_user'];
 
         }
 
     }
 
-    protected function collegeAndUserCompability ()
+    protected function collegeAndUserCompability (int $jobCollege)
     {
         
+        $compabilitySum = 0;
+        $compabilityMax = 110;
+
+        $compabilitySum += $this->compareSimpleElements($this->jobUser,$jobCollege);
+        $compabilitySum += $this->compareSimpleElements();
+
+
         
     }
 
@@ -127,6 +136,14 @@ class User extends Database
         return $rows;
 
     }
+
+    protected function compareSimpleElements (int $userIntSimpleValues,int $collegeIntSimpleValues) :int
+    {
+
+        if($userIntSimpleValues == $collegeIntSimpleValues)
+            return 5;
+
+    } 
 
     /*search 2 elements in an array*/ 
     protected function foundInArray (array $array, string $userString, string $collegeString) :bool
