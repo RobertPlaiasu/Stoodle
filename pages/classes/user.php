@@ -111,6 +111,22 @@ class User extends Database
 
     }
 
+    protected function allCollegesWithCompability() :array
+    {
+
+        $colleges = $this->getAllColleges();
+        $collegesWithNewValues = array();
+
+        foreach($colleges as $college)
+        {
+
+            $newCollege = new College($college['index_college'],$college['name_college'],$college['university_college'],
+                                      $college['county_college'],$college);
+
+        }
+
+    }
+
     protected function collegeAndUserCompability (int $jobCollege,int $sportCollege,int $socialCollege,int $stressCollege,
                                                   string $profilCollege,string $passionCollege,string $subject1College,
                                                   string $subject2College,string $subject3College,string $countyCollege) :int
