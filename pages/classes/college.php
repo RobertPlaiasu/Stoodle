@@ -35,7 +35,7 @@ class College extends Database
 
     }
     
-    public function echoCollege()
+    public function echoCollege() :void
     {
         echo "<div class=\"col card\">
                 <!--Image Background-->
@@ -119,15 +119,27 @@ class College extends Database
     public function favoriteCollegeFound() :void
     {
 
-        if(binarySearch($favorite, $card->Indexf))
-            echo '<button type="submit" style="all: unset" name="scoatere" id="'.$card->Indexf.'" value="'.$card->Indexf.'">
+        if(binarySearch($this->getFavoriteColleges(), $this->idCollege))
+            echo '<button type="submit" style="all: unset" name="scoatere" id="'.$this->idCollege.'" value="'.$this->idCollege.'">
                   <i class="fas fa-heart"></i> Scoate de la favorite</button>';
         else
-             echo '<button type="submit" style="all: unset" name="adaugare" id="'.$card->Indexf.'" value="'.$card->Indexf.'">
+             echo '<button type="submit" style="all: unset" name="adaugare" id="'.$this->idCollege.'" value="'.$this->idCollege.'">
                    <i class="far fa-heart"></i> Adauga la favorite</button>';
 
     }
- 
+
+    private function getFavoriteColleges() :array
+    {
+
+        $mysql = "SELECT * FROM favorite WHERE idUser = '$id' AND tip = '$tip'";
+        $stmt = $this->connection()->query($mysql);
+
+        $rows = $stmt->fetchAll();
+        return sort($rows);
+
+    }
+
+
 
 }
 
