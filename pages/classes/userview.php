@@ -32,5 +32,22 @@ class UserView extends User
           
     }
 
+    //echo all the colleges
+    protected function allCollegesWithCompability() :array
+    {
+
+        $colleges = $this->getAllColleges();
+        $collegesWithNewValues = array();
+
+        foreach($colleges as $college)
+        {
+
+            $newCollege = new College($college['index_college'],$college['name_college'],$college['university_college'],
+                                      $college['county_college'],$college);
+
+        }
+
+    }
+
 
 }

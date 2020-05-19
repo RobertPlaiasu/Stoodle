@@ -12,12 +12,11 @@ class College extends Database
     private $universityCollege;
     private $countyCollege;
     private $profilCollege;
-    private $getCompabilityCollege;
-    private $linkCollege;
     private $compabilityCollege;
+    private $linkCollege;
 
     function __construct(int $idCollege,string $nameCollege,string $universityCollege,string $countyCollege,string $profilCollege,
-                         string $linkCollege,string $pictureCollege)
+                         string $linkCollege,string $pictureCollege,int $compabilityCollege)
     {
         $this->idCollege = $idCollege;
         $this->nameCollege = $nameCollege;
@@ -26,8 +25,10 @@ class College extends Database
         $this->profilCollege = $profilCollege;
         $this->linkCollege = $linkCollege;
         $this->pictureCollege = $pictureCollege;
+        $this->compabilityCollege = $compabilityCollege;
     }
 
+    //save the compability in an object
     public function saveCompability(int $compability) :void
     {
 
@@ -35,6 +36,7 @@ class College extends Database
 
     }
     
+    //echo information for 1 college
     public function echoCollege() :void
     {
         echo "<div class=\"col card\">
@@ -91,6 +93,7 @@ class College extends Database
             </div>";
     }
 
+    //binary search
     private function binarySearch(array $array,$target) :bool
     {
 
@@ -116,18 +119,20 @@ class College extends Database
 
     }
 
-    public function favoriteCollegeFound() :void
+    //show the favorite college
+    public function favoriteCollegeFound() :string
     {
 
         if(binarySearch($this->getFavoriteColleges(), $this->idCollege))
-            echo '<button type="submit" style="all: unset" name="scoatere" id="'.$this->idCollege.'" value="'.$this->idCollege.'">
+            return '<button type="submit" style="all: unset" name="scoatere" id="'.$this->idCollege.'" value="'.$this->idCollege.'">
                   <i class="fas fa-heart"></i> Scoate de la favorite</button>';
         else
-             echo '<button type="submit" style="all: unset" name="adaugare" id="'.$this->idCollege.'" value="'.$this->idCollege.'">
+            return '<button type="submit" style="all: unset" name="adaugare" id="'.$this->idCollege.'" value="'.$this->idCollege.'">
                    <i class="far fa-heart"></i> Adauga la favorite</button>';
 
     }
 
+    //get from the database all the colleges from the favorite table
     private function getFavoriteColleges() :array
     {
 
