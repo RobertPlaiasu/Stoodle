@@ -178,7 +178,7 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
         </form>
         </div>
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <script src="../JS/formular.js"></script>
+        <script src="./JS/formular.js"></script>
     </body>
 
 </html>

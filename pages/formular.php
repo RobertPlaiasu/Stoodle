@@ -7,29 +7,24 @@
     exit();
   }
 
-  $profil=$_POST['branch'];
-  $pasiune=$_POST['passion'];
-  $intensitate_pasiune=$_POST['passionIntensity'];
-  $job=$_POST['job'];
-  $carti=$_POST['books'];
-  $judet=$_POST['county'];
-  $sport=$_POST['sport'];
-  $stres=$_POST['stress'];
-  $social=$_POST['social'];
-  $materie1=$_POST['class-1'];
-  $materie2=$_POST['class-2'];
-  $materie3=$_POST['class-3'];
+  // check if information is valid
 
+  // get data from json file
+  $jsonFile = file_get_contents("ajax/formular.json");
+  $jsonFile = json_decode($jsonFile, true);
   
-
-  if(empty($pasiune) || empty($intensitate_pasiune) || empty($carti) || empty($judet) ||  empty($materie1) || empty($materie2) || empty($materie3) ||
-    $intensitate_pasiune>6 || $intensitate_pasiune<0){
-    
-    header("Location: ./formularTemplate.php");
-    exit();
-  }
-
-  if (($materie1 == $materie2 || $materie1 == $materie3) || ($materie2 == $materie3 && $materie2!="Niciuna din cele de mai jos")) {
+  if( $_POST['sport'] != 0 && $_POST['sport'] != 1 ||
+      $_POST['stress'] != 0 && $_POST['stress'] != 1 ||
+      $_POST['social'] != 0 && $_POST['social'] != 1 ||
+      $_POST['job'] != 0 && $_POST['job'] != 1 ||
+      !in_array($_POST['county'], $jsonFile['county']) ||
+      !in_array($_POST['class-1'], $jsonFile['classes']) ||
+      !in_array($_POST['class-2'], $jsonFile['classes']) ||
+      !in_array($_POST['class-3'], $jsonFile['classes']) ||
+      !in_array($_POST['books'], $jsonFile['books']) ||
+      !in_array($_POST['branch'], $jsonFile['branch']) ||
+      !in_array($_POST['passion'], $jsonFile['passion']) ||
+      $_POST["passionIntensity"] > 6 || $_POST["passionIntensity"] < 0){
     header("Location: ./formularTemplate.php?error=materii");
     exit();
   }
@@ -52,7 +47,9 @@
     exit();
   }
   
-  mysqli_stmt_bind_param($stmt,"sssssssssssss",$profil,$pasiune,$intensitate_pasiune,$job,$materie1,$materie2,$materie3,$carti,$social,$sport,$stres,$judet,$session);
+  mysqli_stmt_bind_param($stmt,"sssssssssssss", $_POST["branch"], $_POST["passion"], $_POST["passionIntensity"],
+                        $_POST["job"], $_POST["class-1"], $_POST["class-2"], $_POST["class-3"], $_POST["books"],
+                        $_POST["social"], $_POST["sport"], $_POST["stress"], $_POST["county"],$session);
   mysqli_stmt_execute($stmt);
 
   header("Location: ./homePage.php");

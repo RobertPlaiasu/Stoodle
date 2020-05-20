@@ -1,8 +1,8 @@
 $(document).ready(function(){
-    $.getJSON( "ajax/fromular.json", function( data ) {
+    $.getJSON( "./ajax/formular.json", function( data ) {
         $.each( data, function() {
-            for (let i = 0; i < data.classSelect.length; i++) 
-                $(".classSelect").append(`<option value="${data.classSelect[i]}">${data.classSelect[i]}</option>`);
+            for (let i = 0; i < data.classes.length; i++) 
+                $(".classSelect").append(`<option value="${data.classes[i]}">${data.classes[i]}</option>`);
 
             for (let i = 0; i < data.county.length; i++) 
                 $("#countyPassion").append(`<option value="${data.county[i]}">${data.county[i]}</option>`);
