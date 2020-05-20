@@ -43,8 +43,16 @@ class UserView extends User
         {
 
             $newCollege = new College($college['index_college'],$college['name_college'],$college['university_college'],
-                                      $college['county_college'],$college);
+                                      $college['county_college'],$college['profil_college'],$college['link_college'],
+                                      $college['picture_college']);
+            
+            $compability = $this->collegeAndUserCompability($college['job_college'],$college['sport_college'],
+                                                            $college['soccial_college'],$college['stress_college'],
+                                                            $college['profil_college'],$college['passion_college'],
+                                                            $college['subject1_college'],$college['subject2_college'],
+                                                            $college['subject3_college'],$college['county_college']);
 
+            $newCollege->saveCompability($compability);
         }
 
     }

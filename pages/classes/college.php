@@ -12,11 +12,12 @@ class College extends Database
     private $universityCollege;
     private $countyCollege;
     private $profilCollege;
+    private $pictureCollege;
     private $compabilityCollege;
     private $linkCollege;
 
     function __construct(int $idCollege,string $nameCollege,string $universityCollege,string $countyCollege,string $profilCollege,
-                         string $linkCollege,string $pictureCollege,int $compabilityCollege)
+                         string $linkCollege,string $pictureCollege)
     {
         $this->idCollege = $idCollege;
         $this->nameCollege = $nameCollege;
@@ -25,7 +26,7 @@ class College extends Database
         $this->profilCollege = $profilCollege;
         $this->linkCollege = $linkCollege;
         $this->pictureCollege = $pictureCollege;
-        $this->compabilityCollege = $compabilityCollege;
+
     }
 
     //save the compability in an object
