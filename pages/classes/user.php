@@ -15,7 +15,7 @@ class User extends Database
     public $subject3User;
     public $booksUser;
     public $sportUser;
-    public $socialUser;
+    public $soccialUser;
     public $stressUser;
     public $countyUser;
     public $pictureUser;
@@ -112,7 +112,7 @@ class User extends Database
     }
 
     //algorithm to calculate the compability for every college 
-    protected function collegeAndUserCompability (int $jobCollege,int $sportCollege,int $socialCollege,int $stressCollege,
+    protected function collegeAndUserCompability (int $jobCollege,int $sportCollege,int $soccialCollege,int $stressCollege,
                                                   string $profilCollege,string $passionCollege,string $subject1College,
                                                   string $subject2College,string $subject3College,string $countyCollege) :int
     {
@@ -122,7 +122,7 @@ class User extends Database
 
         $compabilitySum += $this->compareSimpleElements($this->jobUser,$jobCollege);
         $compabilitySum += $this->compareSimpleElements($this->sportUser,$sportCollege);
-        $compabilitySum += $this->compareSimpleElements($this->socialUser,$socialCollege);
+        $compabilitySum += $this->compareSimpleElements($this->soccialUser,$soccialCollege);
         $compabilitySum += $this->compareSimpleElements($this->stressUser,$stressCollege);
 
         $compabilitySum += $this->compareProfil($profilCollege);
