@@ -209,7 +209,7 @@ sort($favorite);
                         <div class="row-lg-3 fav text-center">
                             <form action="./favoriteAlg.php" method="post">
                                 <?php
-                            echo '<button type="submit" style="all: unset" name="scoatere_fav" id="'.$card->Indexf.'" value="'.$card->Indexf.'"><i class="fas fa-heart"></i> Scoate de la favorite</button>';
+                            echo '<button id="favorite" style="all: unset" name="scoatere_fav" id="'.$card->Indexf.'" value="'.$card->Indexf.'"><i class="fas fa-heart"></i> Scoate de la favorite</button>';
                                 ?>
                             </form>
                         </div>
@@ -233,6 +233,23 @@ sort($favorite);
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function($){
+                $('#favorite').on('click', function(e){
+                    e.preventDefault();
+                    $.ajax({
+                        url: 'path/to/script.php',
+                        type: 'POST',
+                        data: {liked: false},
+                        cache: false,
+                        success: function(data){
+                            alert(data);
+                        }
+                    });
+                });
+            });
+        </script>
         <script src="./JS/homepage.js"></script>
     </body>
 </html>
