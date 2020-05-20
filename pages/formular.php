@@ -7,12 +7,12 @@
     exit();
   }
 
-  $profil=$_POST['profile'];
+  $profil=$_POST['branch'];
   $pasiune=$_POST['passion'];
   $intensitate_pasiune=$_POST['passionIntensity'];
   $job=$_POST['job'];
   $carti=$_POST['books'];
-  $judet=$_POST['judet'];
+  $judet=$_POST['county'];
   $sport=$_POST['sport'];
   $stres=$_POST['stress'];
   $social=$_POST['social'];
@@ -20,11 +20,11 @@
   $materie2=$_POST['class-2'];
   $materie3=$_POST['class-3'];
 
-  if(empty($pasiune) || empty($intensitate_pasiune) || empty($carti) || empty($judet) ||  empty($materie1) || empty($materie2) || empty($materie3)){
-    header("Location: ./formularTemplate.php");
-    exit();
-  }
-  if ($intensitate_pasiune>6 || $intensitate_pasiune<0) {
+  
+
+  if(empty($pasiune) || empty($intensitate_pasiune) || empty($carti) || empty($judet) ||  empty($materie1) || empty($materie2) || empty($materie3) ||
+    $intensitate_pasiune>6 || $intensitate_pasiune<0){
+    
     header("Location: ./formularTemplate.php");
     exit();
   }
@@ -48,7 +48,7 @@
   $stmt=mysqli_stmt_init($connection);
 
   if(!mysqli_stmt_prepare($stmt,$mysql)){
-    header("Location: ./formularTemplate.php?l");
+    header("Location: ./formularTemplate.php?database-error");
     exit();
   }
   

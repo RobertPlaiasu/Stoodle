@@ -140,8 +140,8 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
                 <select class="custom-select mb-2 classSelect" name="class-3" class="classSelect"></select>
             </div>
             <div class="form-group">
-                <label for="profile">Pe ce profil esti?</label>
-                <select class="custom-select" name="profile" id="profileSelect"></select>
+                <label for="branch">Pe ce profil esti?</label>
+                <select class="custom-select" name="branch" id="branchSelect"></select>
             </div>
             <div class="form-group">
                 <label for="stress">Poti face fata unor situatii strsante?</label>
@@ -162,8 +162,8 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
                 <select class="custom-select" name="books" id="booksSelect"></select>
             </div>
             <div class="form-group">
-                <label for="judet">Din ce judet esti?</label>
-                <select class="custom-select" name="judet" id="judetPassion"></select>
+                <label for="county">Din ce judet esti?</label>
+                <select class="custom-select" name="county" id="countyPassion"></select>
             </div>
             <div class="form-group">
                 <label for="social">Te consideri o persoana sociabila?</label>
@@ -189,11 +189,11 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
                     for (let i = 0; i < data.classSelect.length; i++) 
                         $(".classSelect").append(`<option value="${data.classSelect[i]}">${data.classSelect[i]}</option>`);
 
-                    for (let i = 0; i < data.judet.length; i++) 
-                        $("#judetPassion").append(`<option value="${data.judet[i]}">${data.judet[i]}</option>`);
+                    for (let i = 0; i < data.county.length; i++) 
+                        $("#countyPassion").append(`<option value="${data.county[i]}">${data.county[i]}</option>`);
 
-                    for (let i = 0; i < data.profile.length; i++) 
-                        $("#profileSelect").append(`<option value="${data.profile[i]}">${data.profile[i]}</option>`);
+                    for (let i = 0; i < data.branch.length; i++) 
+                        $("#branchSelect").append(`<option value="${data.branch[i]}">${data.branch[i]}</option>`);
 
                     for (let i = 0; i < data.books.length; i++) 
                         $("#booksSelect").append(`<option value="${data.books[i]}">${data.books[i]}</option>`);
