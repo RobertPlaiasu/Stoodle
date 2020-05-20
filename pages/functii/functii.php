@@ -20,7 +20,8 @@ function getSuccesMessage ($succesType, $message) {
     
 }
 
-function binarySearch (Array $array, $target) {
+function binarySearch (Array $array, $target) 
+{
 
   if (count($array) === 0) return false;
   
@@ -41,11 +42,6 @@ function binarySearch (Array $array, $target) {
 	return false;
 }
 
-  function checkExists($target, $array){
-    for ($ndex=0; $ndex < count($array); $ndex++) 
-      if(in_array($target, $array[index])) return $index;
-    return -1;
-}
 
 function compareClass ($valoare1,$valoare_user,$valoare2,$valoare3) {
 

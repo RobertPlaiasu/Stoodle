@@ -72,7 +72,7 @@ class User extends Database
 
     }
 
-
+    // check if the form with questions is completed
     public function checkFormCompleted() :void
     {
 
@@ -111,6 +111,7 @@ class User extends Database
 
     }
 
+    //algorithm to calculate the compability for every college 
     protected function collegeAndUserCompability (int $jobCollege,int $sportCollege,int $socialCollege,int $stressCollege,
                                                   string $profilCollege,string $passionCollege,string $subject1College,
                                                   string $subject2College,string $subject3College,string $countyCollege) :int
@@ -136,7 +137,7 @@ class User extends Database
     }
 
 
-
+    //get all the colleges from the database
     protected function getAllColleges () :array
     {
 
@@ -148,6 +149,7 @@ class User extends Database
 
     }
 
+    //compare the values from the college with 0 and 1 stored in them
     protected function compareSimpleElements (int $userIntSimpleValues,int $collegeIntSimpleValues) :int
     {
 
@@ -181,6 +183,7 @@ class User extends Database
 
     }
 
+    //compare the subject between college and user
     protected function compareSubject (string $collegeSubject) :int
     {
 
@@ -215,6 +218,7 @@ class User extends Database
 
     }
 
+    //compare the passion between college and user
     protected function comparePassion (string $collegePassion) :int
     {
 
@@ -256,6 +260,7 @@ class User extends Database
 
     }
 
+    //compare the county between college and user
     protected function compareCounty(string $collegeCounty) :int
     {
 
@@ -282,6 +287,7 @@ class User extends Database
 
     }
 
+    //compare the profil between college and user
     protected function compareProfil (string $collegeProfil) :int
     {
 
