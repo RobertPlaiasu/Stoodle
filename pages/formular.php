@@ -50,7 +50,7 @@
   mysqli_stmt_bind_param($stmt,"sssssssssssss", $_POST["branch"], $_POST["passion"], $_POST["passionIntensity"],
                         $_POST["job"], $_POST["class-1"], $_POST["class-2"], $_POST["class-3"], $_POST["books"],
                         $_POST["social"], $_POST["sport"], $_POST["stress"], $_POST["county"],$session);
-  mysqli_stmt_execute($stmt);
+    mysqli_stmt_execute($stmt);
 
   header("Location: ./homePage.php");
   exit();
