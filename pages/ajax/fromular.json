@@ -1,0 +1,27 @@
+{
+    "classSelect" : [
+        "Limba si literatura romana","Engleza","Franceza","Germana","Spaniola","Matematica","Fizica","Educatie fizica","Religie","Informatica","TIC","Educatie civica","Desen","Muzica",
+        "Biologie","Chimie","Istorie","Geografie","Economie","ATP","Latina","Psihologie","Sociologie", "Nici una din cele de mai sus"
+    ],
+    "judet" : [
+        "Alba","Arad ","Arges","Bacau","Bihor","Bistrita-Nasaud","Botosani","Braila","Brasov","Buzau","Calarasi","Caras-Severin","Cluj","Constanta","Covasna","Dambovita",
+        "Dolj","Galati","Giurgiu","Gorj","Harghita","Hunedoara","Ialomita","Iasi","Ilfov","Maramures","Mehedinti","Mures","Neamt","Olt","Prahova","Salaj","Satu-Mare","Sibiu","Suceava","Teleorman",
+        "Timis","Tulcea","Valcea","Vaslui","Vrancea"
+    ],
+
+    "books": [
+        "Culinare","Arte,tehnica","Enciclopedii","Biografii,memorii","Lingvistica","Limbi straine","Teatru","Poezie/Literatura","Fictine","Atlase,ghiduri turistice","Istorie","Religie",
+        "Filozofie","Psihologie","Stiinte sociale,politica","Marketing si comunicare","Business si economie","Drept","Medicina","Stiinte exacte","Natura si mediu","Tehnica si tehnologie",
+        "Computere si internet","Dezvoltare personala","Lifestyle,sport"
+    ],
+
+    "profile": [
+        "Teologic","Mate-info","Filologie","Stiinte ale naturii","Sportiv","Tehnologic","Arhitectura","Actorie","Stiinte-sociale"
+    ],
+
+    "passion": [
+        "Medicina","Matematica","Agricultura","Ecologie","Programare/Calculatoare","Literatura","Muzica","Desen","Arhitectura","Astronomie","Fizica","Sport","Religie","Economie",
+        "Business","Politica","Limbi straine","Filozofie","Drept","Biologie","Geografie","Geologie","Istorie","Jurnalism","Psihologie","Design","Constructii","Serviciul militar","Actorie","Regie","Editare video/sunet",
+        "Chimie","Animale","Limba romana","Serviciul in cadrul politiei","Electronica","Inginerie electrica","Cibernetica","Inginerie Aerospatila"
+    ]
+}

@@ -136,9 +136,9 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
             </div>
             <div class="form-group">
                 <label for="classes">Ce materii iti plac?</label>
-                <select class="custom-select mb-2" id="classSelect1"></select>
-                <select class="custom-select mb-2" id="classSelect1"></select>
-                <select class="custom-select mb-2" id="classSelect1"></select>
+                <select class="custom-select mb-2 classSelect" class="classSelect"></select>
+                <select class="custom-select mb-2 classSelect" class="classSelect"></select>
+                <select class="custom-select mb-2 classSelect" class="classSelect"></select>
             </div>
             <div class="form-group">
                 <label for="profile">Pe ce profil esti?</label>
@@ -183,7 +183,27 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
             <input type="submit" value="Trimite Formular" name="formularsubmit" class="button">
         </form>
         </div>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script>
+            $.getJSON( "ajax/fromular.json", function( data ) {
+                $.each( data, function() {
+                    for (let i = 0; i < data.classSelect.length; i++) 
+                        $(".classSelect").append(`<option value="${data.classSelect[i]}">${data.classSelect[i]}</option>`);
+
+                    for (let i = 0; i < data.judet.length; i++) 
+                        $("#judetPassion").append(`<option value="${data.judet[i]}">${data.judet[i]}</option>`);
+
+                    for (let i = 0; i < data.profile.length; i++) 
+                        $("#profileSelect").append(`<option value="${data.profile[i]}">${data.profile[i]}</option>`);
+
+                    for (let i = 0; i < data.books.length; i++) 
+                        $("#booksSelect").append(`<option value="${data.books[i]}">${data.books[i]}</option>`);
+
+                    for (let i = 0; i < data.passion.length; i++) 
+                        $("#passionSelect").append(`<option value="${data.passion[i]}">${data.passion[i]}</option>`);
+                });
+            });
+        </script>
     </body>
 
 </html>
