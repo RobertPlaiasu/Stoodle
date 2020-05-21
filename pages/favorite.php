@@ -88,13 +88,8 @@ sort($favorite);
     <body>
         <!-- SIDE BAR -->
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a href="#">
-                <?php
-                    if (isset($row['prenumeGmail']))
-                        print "Salut, ".$row['prenumeGmail'];
-                    else if (isset($row['Prenume']))
-                        print "Salut, ".$row['Prenume'];
-                ?>
+            <a href="/">
+                <?php require_once "navbar.php" ?>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon">☰</span>

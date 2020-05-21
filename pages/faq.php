@@ -1,12 +1,10 @@
 <?php
-require './folderlogin/datacon.php';
-session_start();
 
-if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
-    header("Location: ../index.php");
-    exit();
-}
+session_start();
+require_once "header.php";
+
 ?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -21,29 +19,8 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a href="#">
-                <?php
-                if (isset($_SESSION['mailUser'])){
-                  $mail=$_SESSION['mailUser'];
-                  $sql = "SELECT * FROM `users` WHERE `mailUser` = '$mail'";
-                }
-
-                if (isset($_SESSION['mailGmail'])){
-                  $mail=$_SESSION['mailGmail'];
-                  $sql = "SELECT * FROM `users_gmail` WHERE `mailGmail` = '$mail'";
-                }
-                $result = mysqli_query($connection,$sql);
-                $myArray = array();
-                if (mysqli_num_rows($result) > 0) {
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {
-                      if (isset($_SESSION['mailUser']))
-                        print "Salut, ".$row['Prenume'];
-                      else
-                        print "Salut, ".$row['prenumeGmail'];
-                    }
-                }
-                ?>
+            <a href="/">
+                <?php require_once "navbar.php" ?>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon">☰</span>

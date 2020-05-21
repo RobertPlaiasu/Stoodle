@@ -1,6 +1,5 @@
 <?php
 
-include 'array.php';
 include 'functii/functii.php';
 require_once './folderlogin/datacon.php';
 
@@ -70,11 +69,6 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
 
     checkDatabase($stmt, $mysql);
 
-    // if (!mysqli_stmt_prepare($stmt,$mysql)) {
-    //     header("Location: ./register.php?error=mysqlerror&select=".$select."&valid=".$token);
-    //     exit();
-    // }
-
     mysqli_stmt_bind_param($stmt,"ssss",$rand['numeVerificare'],$rand['prenumeVerificare'],$rand['mailVerificare'],$rand['parolaVerificare']);
     mysqli_stmt_execute($stmt);
 
@@ -109,73 +103,73 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
         <form action="./formular.php" method="post" id="formular">
             <div class="form-group">
                 <label for="passion">De ce esti pasionat?</label>
-                <select class="custom-select" id="passionSelect"></select>
+                <select class="custom-select" id="passionSelect" name="passion"></select>
             </div>
             <div class="form-group">
-                <label for="passion-metter">Cat de pasionat esti?</label> <br>
-                <input class="radio" type="radio" name="budget" id="budget-1" checked>
+            <label for="passion-metter">Cat de pasionat esti?</label> <br>
+                <input class="radio" type="radio" name="passionIntensity" id="budget-1" value="1" checked>
                     <label class="for-radio" for="budget-1">
                         <span data-hover="1">1</span>
                     </label>
-                <input class="radio" type="radio" name="budget" id="budget-2">
+                <input class="radio" type="radio" name="passionIntensity" id="budget-2" value="2">
                     <label class="for-radio" for="budget-2">							
                         <span data-hover="2">2</span>
                     </label>    
-                <input class="radio" type="radio" name="budget" id="budget-3">
+                <input class="radio" type="radio" name="passionIntensity" id="budget-3" value="3">
                     <label class="for-radio" for="budget-3">							
                         <span data-hover="3">3</span>
                     </label>
-                <input class="radio" type="radio" name="budget" id="budget-4">
+                <input class="radio" type="radio" name="passionIntensity" id="budget-4" value="4">
                     <label class="for-radio" for="budget-4">							
                         <span data-hover="4">4</span>
                     </label>
-                <input class="radio" type="radio" name="budget" id="budget-5">
+                <input class="radio" type="radio" name="passionIntensity" id="budget-5" value="5">
                     <label class="for-radio" for="budget-5">							
                         <span data-hover="5">5</span>
                     </label>
             </div>
             <div class="form-group">
                 <label for="classes">Ce materii iti plac?</label>
-                <select class="custom-select mb-2" id="classSelect1"></select>
-                <select class="custom-select mb-2" id="classSelect1"></select>
-                <select class="custom-select mb-2" id="classSelect1"></select>
+                <select class="custom-select mb-2 classSelect" name="class-1" class="classSelect"></select>
+                <select class="custom-select mb-2 classSelect" name="class-2" class="classSelect"></select>
+                <select class="custom-select mb-2 classSelect" name="class-3" class="classSelect"></select>
             </div>
             <div class="form-group">
-                <label for="profile">Pe ce profil esti?</label>
-                <select class="custom-select" id="profileSelect"></select>
+                <label for="branch">Pe ce profil esti?</label>
+                <select class="custom-select" name="branch" id="branchSelect"></select>
             </div>
             <div class="form-group">
                 <label for="stress">Poti face fata unor situatii strsante?</label>
-                <select class="custom-select" id="passionSelect">
+                <select class="custom-select" name="stress" id="passionSelect">
                     <option value="1">Da</option>
                     <option value="0">Nu</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="job">Iti doresti un part-time job?</label>
-                <select class="custom-select" id="jobSelect">
+                <select class="custom-select" name="job" id="jobSelect">
                     <option value="1">Da</option>
                     <option value="0">Nu</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="books">Ce tip de carti citesti?</label>
-                <select class="custom-select" id="booksSelect"></select>
+                <select class="custom-select" name="books" id="booksSelect"></select>
             </div>
             <div class="form-group">
-                <label for="judet">Din ce judet esti?</label>
-                <select class="custom-select" id="judetPassion"></select>
+                <label for="county">Din ce judet esti?</label>
+                <select class="custom-select" name="county" id="countyPassion"></select>
             </div>
             <div class="form-group">
                 <label for="social">Te consideri o persoana sociabila?</label>
-                <select class="custom-select" id="socialSelect">
+                <select class="custom-select" name="social" id="socialSelect">
                     <option value="1">Da</option>
                     <option value="0">Nu</option>   
                 </select>
             </div>
             <div class="form-group">
                 <label for="sport">Practici vreun sport?</label>
-                <select class="custom-select" id="sportSelect">
+                <select class="custom-select" name="sport" id="sportSelect">
                     <option value="1">Da</option>
                     <option value="0">Nu</option>                       
                 </select>
@@ -183,7 +177,8 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
             <input type="submit" value="Trimite Formular" name="formularsubmit" class="button">
         </form>
         </div>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="./JS/formular.js"></script>
     </body>
 
 </html>
