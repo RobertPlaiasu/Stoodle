@@ -6,6 +6,8 @@ class UserView extends User
     //construct is inherited from User
 
 
+    private $collegesAll;
+
     //messages for form errors
     public function getMainErrorMessage ($errorType, $message)
     {
@@ -23,7 +25,7 @@ class UserView extends User
           
     }
 
-    //succes messages for forms
+    //save the data from each college in an array  
     public function getSuccesMessage ($succesType, $message) 
     {
       
@@ -33,7 +35,7 @@ class UserView extends User
     }
 
     //echo all the colleges
-    protected function allCollegesWithCompability() :array
+    private function allCollegesWithCompability() :array
     {
 
         $colleges = $this->getAllColleges();
@@ -53,6 +55,39 @@ class UserView extends User
                                                             $college['subject3_college'],$college['county_college']);
 
             $newCollege->saveCompability($compability);
+
+            array_push($collegesWithNewValues,$newCollege);
+
+        }
+
+        return $collegesWithNewValues;
+
+
+    }
+
+    private function functionFromUsort($first,$second) 
+    {
+    
+        return $first->compabilitate < $second->compabilitate;
+        
+    }
+
+    private function sortAllColleges() :void
+    {
+
+        $this->collegesAll = usort($this->allCollegesWithCompability(),$this->functionFromUsort()); 
+
+    }
+
+    public function echoAllColleges() :void
+    {
+        $this->sortAllColleges();
+
+        foreach($this->collegesAll as $card)
+        {
+
+            $card->echoCollege();
+
         }
 
     }

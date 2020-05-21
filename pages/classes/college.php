@@ -13,7 +13,7 @@ class College extends Database
     private $countyCollege;
     private $profilCollege;
     private $pictureCollege;
-    private $compabilityCollege;
+    public $compabilityCollege;
     private $linkCollege;
 
     function __construct(int $idCollege,string $nameCollege,string $universityCollege,string $countyCollege,string $profilCollege,

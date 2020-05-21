@@ -102,7 +102,8 @@ function compareBranch ($valoare,$valoare_user) {
 function comparePassion ($valoare,$valoare_user, $intensity) {
 
   $pasiune_programare=array("Matematica","Programare/Calculatoare","Electronica","Cibernetica");
-  $pasiune_fizica=array("Matematica","Fizica","Astronomie","Arhitectura","Constructii","Inginerie electrica","Electronica","Inginerie Aerospatila");
+  $pasiune_fizica=array("Matematica","Fizica","Astronomie","Arhitectura","Constructii","Inginerie electrica",
+                        "Electronica","Inginerie Aerospatila");
   $pasiune_medicina=array("Chimie","Medicina","Biologie","Animale","Agricultura","Ecologie","Animale");
   $pasiune_politica=array("Politica","Drept");
   $pasiune_lingvistica=array("Limbi straine","Literatura","Limba romana","Filozofie","Psihologie");
@@ -137,8 +138,11 @@ function comparePassion ($valoare,$valoare_user, $intensity) {
 
 function compareCounty ($valoare,$valoare_user){
 
-  $judet_sud=array("Ilfov","Prahova","Teleorman","Giurgiu","Calarasi","Constanta","Tulcea","Braila","Buzau","Bucuresti","Dambovita","Arges","Valcea","Gorj","Mehedinti","Dolj","Brasov");
-  $judet_transilvania=array("Satu-Mare","Maramures","Bihor","Arad","Timis","Caras-Severin","Hunedoara","Alba","Cluj","Salaj","Sibiu","Brasov","Covasna","Harghita","Mures","Bistrita-Nasaud","Cluj");
+  $judet_sud=array("Ilfov","Prahova","Teleorman","Giurgiu","Calarasi","Constanta","Tulcea","Braila",
+                   "Buzau","Bucuresti","Dambovita","Arges","Valcea","Gorj","Mehedinti","Dolj","Brasov");
+  $judet_transilvania=array("Satu-Mare","Maramures","Bihor","Arad","Timis","Caras-Severin","Hunedoara",
+                            "Alba","Cluj","Salaj","Sibiu","Brasov","Covasna",
+                            "Harghita","Mures","Bistrita-Nasaud","Cluj");
   $judet_moldova=array("Galati","Vrancea","Bacau","Iasi","Neamt","Suceava","Botosani","Harghita","Brasov","Covasna");
 
 

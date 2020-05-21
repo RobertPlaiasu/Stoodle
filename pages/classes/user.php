@@ -114,11 +114,15 @@ class User extends Database
     //algorithm to calculate the compability for every college 
     protected function collegeAndUserCompability (int $jobCollege,int $sportCollege,int $soccialCollege,int $stressCollege,
                                                   string $profilCollege,string $passionCollege,string $subject1College,
-                                                  string $subject2College,string $subject3College,string $countyCollege) :int
+                                                  string $subject2College,string $subject3College,string $countyCollege,
+                                                  string $booksCollege) :int
     {
         
         $compabilitySum = 0;
         $compabilityMax = 110;
+
+        if($this->booksUser == $booksCollege)
+            $compabilitySum +=5;
 
         $compabilitySum += $this->compareSimpleElements($this->jobUser,$jobCollege);
         $compabilitySum += $this->compareSimpleElements($this->sportUser,$sportCollege);
