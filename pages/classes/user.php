@@ -40,7 +40,7 @@ class User extends Database
 
         if( isset($this->emailUser) && isset($this->typeUser) )
         {
-            header("Location: ../homePage.php");
+            header("Location: ../home.php");
             exit();
         }
     
