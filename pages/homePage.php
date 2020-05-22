@@ -1,31 +1,12 @@
 <?php
 session_start();
-require_once "header.php";
 
-// Get the type and id of the user
-if(isset($_SESSION['mailGmail'])){
-    $_SESSION["tip"] = "gmail";
-    $_SESSION["id"] = $row["idGmail"];
-}
 
-if(isset($_SESSION['mailUser'])){
-    $_SESSION["tip"] = "normal";
-    $_SESSION["id"] = $row["idUser"];
-}
 
-$tip = $_SESSION["tip"];
-$id = $_SESSION["id"];
+    $user = new UserView($_SESSION['mail'],$_SESSION['type']);
 
-$sql = "SELECT * FROM `favorite` WHERE `idUser` = '$id' AND `tip` = '$tip'";
-$result = mysqli_query($connection,$sql);
-$favorite = array();
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row_fav = $result->fetch_assoc()) {
-        $favorite[] = $row_fav['Indexf'];
-    }
-}
-sort($favorite);
+    $user->checkFormCompleted();
+
 
 
 ?>
@@ -52,36 +33,9 @@ sort($favorite);
 
     <body>
         <!-- SIDE BAR -->
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <a href="/">
-                <?php require_once "navbar.php" ?>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">☰</span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav" style="flex-direction: row-reverse;">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="./homePage.php" class="nav-link">Acasa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a onclick="alert();" class="nav-link">Formular</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./contact.php" class="nav-link">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./favorite.php" class="nav-link">Facultati favorite</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./faq.php" class="nav-link">Intrebari</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./folderlogin/deconectphp.php" class="nav-link"> Deconectare</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <?php
+            $user->echoNavbar();
+        ?>
         <div id="search">
             <input onkeyup="sort()" class="form-control w-75"
                    type="text" placeholder="cauta" id="search_field" aria-label="Search">
@@ -110,77 +64,9 @@ sort($favorite);
 
             <div id="showcase">
                 <div class="row">
-
                     <?php
-                    require './functii/facultati.php';
-                    usort($facultati,function($first,$second){
-                        return $first->compabilitate < $second->compabilitate;
-                    });
-                    // PRINT DATA
-                    foreach ($facultati as $card) {
+                        $user->echoAllColleges();
                     ?>
-                    <!--Print the card-->
-                    <div class="col card">
-                        <!--Image Background-->
-                        <div class="row-lg-4 backgrounded"></div>
-                        <!--Print the proprities-->
-                        <div class="row-lg-2 name">
-                            <?php
-                                echo $card->nume;
-                            ?>
-                        </div>
-                        <div class="row-lg-3 prop text-center">
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <?php
-                                            echo $card->universitate;
-                                        ?>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-between">
-                                    <div class="col">
-                                        <?php
-                                            echo $card->compabilitate
-                                        ?>
-                                        <i class="fas fa-percentage"></i></div>
-                                    <div class="col">
-                                        <?php
-                                            echo $card->judet;
-                                        ?>
-                                        <i class="fas fa-city"></i>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <?php
-                                            echo $card->profil;
-                                        ?>
-                                        <i class="fas fa-code-branch"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row-lg-3 fav text-center">
-                            <form action="./favoriteAlg.php" method="post">
-                                <?php
-                                    if(binarySearch($favorite, $card->Indexf))
-                                        echo '<button type="submit" style="all: unset" name="scoatere" id="'.$card->Indexf.'" value="'.$card->Indexf.'"><i class="fas fa-heart"></i> Scoate de la favorite</button>';
-                                    else
-                                        echo '<button type="submit" style="all: unset" name="adaugare" id="'.$card->Indexf.'" value="'.$card->Indexf.'"><i class="far fa-heart"></i> Adauga la favorite</button>';
-                                ?>
-                            </form>
-                        </div>
-                        <div class="row-lg-3 extra text-center">
-                            <a href="
-                                <?php
-                                echo $card->link;
-                                ?>
-                                " target="_blank">Afla mai mult</a>
-                        </div>
-                    </div>
-                    <?php } ?>
-
                 </div>
             </div>
         </main>

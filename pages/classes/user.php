@@ -73,6 +73,7 @@ class User extends Database
     }
 
     // check if the form with questions is completed
+    // use  this in all pages execpt reset,register and login
     public function checkFormCompleted() :void
     {
 
@@ -167,8 +168,7 @@ class User extends Database
     {
         if( in_array ($userString,$array) && in_array ($collegeString,$array) )
             return true;
-        else
-            return false;
+        return false;
     }
 
     // search 4 elements in an array
@@ -182,8 +182,8 @@ class User extends Database
                
             return true;  
 
-        else
-            return false;
+        
+        return false;
 
     }
 

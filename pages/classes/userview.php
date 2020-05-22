@@ -92,5 +92,41 @@ class UserView extends User
 
     }
 
+    public function echoNavbar() :void
+    {
+
+        echo '<nav class="navbar navbar-expand-lg navbar-light">
+        <a href="/">
+             "Salut, '.$user->firstNameUser.'!"
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">☰</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav" style="flex-direction: row-reverse;">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="./homePage.php" class="nav-link">Acasa</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="alert();" class="nav-link">Formular</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./contact.php" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./favorite.php" class="nav-link">Facultati favorite</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./faq.php" class="nav-link">Intrebari</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./folderlogin/deconectphp.php" class="nav-link"> Deconectare</a>
+                </li>
+            </ul>
+        </div>
+    </nav>';
+
+    } 
+
 
 }
