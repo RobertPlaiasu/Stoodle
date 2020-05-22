@@ -105,7 +105,7 @@ class UserView extends User
         <div class="collapse navbar-collapse" id="navbarNav" style="flex-direction: row-reverse;">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="./homePage.php" class="nav-link">Acasa</a>
+                    <a href="./home.php" class="nav-link">Acasa</a>
                 </li>
                 <li class="nav-item">
                     <a onclick="alert();" class="nav-link">Formular</a>
