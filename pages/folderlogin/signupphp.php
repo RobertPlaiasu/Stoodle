@@ -4,15 +4,16 @@ if(!isset($_POST['signupsubmit'])){
   exit();
 }
 
+
 // Get user data
 require 'datacon.php';
 $nume=$_POST['nume'];
 $prenume=$_POST['prenume'];
 $email=$_POST['email'];
-$email_repeat=$_POST['confirmail'];
-$password=$_POST['passw'];
-$password_repeat=$_POST['passw-repeat'];
-$checkbox=$_POST['checkbox'];
+$email_repeat=$_POST['confirmEmail'];
+$password=$_POST['password'];
+$password_repeat=$_POST['confirmPassword'];
+$checkbox=$_POST['checkbox']; // <-- nu mai folosim checkboxu
 
 /*empty field*/
 function emptyField($var,$nume,$prenume,$email,$email_repeat,$msg){
