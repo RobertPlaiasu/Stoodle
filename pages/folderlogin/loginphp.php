@@ -70,7 +70,8 @@ if (!$password_verify)
     exit();
 }
 
-$_SESSION['mailUser']=$valori['mailUser'];
+$_SESSION['mail'] = $valori['mail'];
+$_SESSION['type'] = $valori['type'];
 
 if ($checkbox==1) {
 
@@ -90,6 +91,6 @@ if ($checkbox==1) {
   setcookie("validator",$token,$date,"/");
 }
 
-header("Location: ../homePage.php");
+header("Location: ../home.php");
 exit();
 

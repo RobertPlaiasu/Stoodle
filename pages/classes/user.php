@@ -1,7 +1,6 @@
 <?php
 
 
-namespace User;
 
 class User extends Database
 {
@@ -29,20 +28,22 @@ class User extends Database
     protected $typeUser;
 
 
-    function __construct(string $session,string $type)
+    function __construct()
     {
-        $this->emailUser = $session;
-        $this->typeUser = $type;
+        if(isset($_SESSION['mail']))
+            $this->emailUser = $_SESSION['mail'];
+        if(isset($_SESSION['type']))
+            $this->typeUser = $_SESSION['type'];
 
     }
 
     //check if session exists
-    public function checkConnectedUserIsset () :void
+    public function checkConnectedUserIsset() :void
     {
 
         if( isset($this->emailUser) && isset($this->typeUser) )
         {
-            header("Location: ../home.php");
+            header("Location: ./home.php");
             exit();
         }
     

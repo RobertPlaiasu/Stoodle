@@ -1,12 +1,12 @@
 <?php
-require 'folderlogin/google-config.php';
-include 'functii/functii.php';
-require_once './folderlogin/google-config.php';
-session_start();
-if (isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])) {
-    header("Location: ./homePage.php");
-    exit();
-}
+    session_start();
+    require_once './folderlogin/google-config.php';
+    include 'autoloader/autoloader.php';
+
+    $user = new UserView();
+
+    $user->checkConnectedUserIsset();
+
 ?>
 
 <!DOCTYPE html>
@@ -30,19 +30,19 @@ if (isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])) {
             <form action="folderlogin/loginphp.php" method="post">
                 <div class="form-group">
                     <?php
-                        getSecondErrorMessage("sqlierror","Eroare server!");
-                        getSecondErrorMessage("fatalerrorsql","Eroare aplicatie!");
-                        getSuccesMessage("resetare","Parola a fost schimbata");
-                        getSuccesMessage("register","Verifica adresa de email pentru a te putea loga!");
+                        $user->getSecondErrorMessage("sqlierror","Eroare server!");
+                        $user->getSecondErrorMessage("fatalerrorsql","Eroare aplicatie!");
+                        $user->getSuccesMessage("resetare","Parola a fost schimbata");
+                        $user->getSuccesMessage("register","Verifica adresa de email pentru a te putea loga!");
                     ?>
                     <input type="email" class="form-control" placeholder=" " id="email" />
                     <label for="email">Email</label>
                 </div>
                 <small class="form-text alert-note">
                     <?php
-                        getMainErrorMessage("emptymail",'Completeaza campul !');
-                        getMainErrorMessage("nuUser",'Email-ul nu a fot gasit!');
-                        getMainErrorMessage("invalidmailuserid",'Email-ul este invalid!');
+                        $user->getMainErrorMessage("emptymail",'Completeaza campul !');
+                        $user->getMainErrorMessage("nuUser",'Email-ul nu a fot gasit!');
+                        $user->getMainErrorMessage("invalidmailuserid",'Email-ul este invalid!');
                     ?>
                 </small>
                 <div class="form-group">
@@ -52,9 +52,10 @@ if (isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])) {
                 </div>
                 <small class="form-text alert-note">
                     <?php
-                        getMainErrorMessage("emptypass","Completeaza campul");
-                        getMainErrorMessage("invalidpassw","Pentru parola se folosesc doar caractere a alfabetui englez si cifrele de la 0-9!");
-                        getMainErrorMessage("parolagresita","Combinatia email si parola este gresita");
+                        $user->getMainErrorMessage("emptypass","Completeaza campul");
+                        $user->getMainErrorMessage("invalidpassw","Pentru parola se folosesc doar 
+                                                                   caractere a alfabetui englez si cifrele de la 0-9!");
+                        $user->getMainErrorMessage("parolagresita","Combinatia email si parola este gresita");
                     ?>
                 </small> 
                 <a href="./register.php">Creeaza-ti un cont!</a>
