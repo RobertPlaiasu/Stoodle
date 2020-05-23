@@ -1,6 +1,8 @@
 <?php
 
 
+namespace User;
+
 class User extends Database
 {
     

@@ -1,11 +1,11 @@
 <?php
 session_start();
 
+include 'autoloader/autoloader.php';
 
+$user = new User\UserView($_SESSION['mail'],$_SESSION['type']);
 
-    $user = new UserView($_SESSION['mail'],$_SESSION['type']);
-
-    $user->checkFormCompleted();
+$user->checkFormCompleted();
 
 
 
