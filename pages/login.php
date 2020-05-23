@@ -58,7 +58,10 @@
                         $user->getMainErrorMessage("parolagresita","Combinatia email si parola este gresita");
                     ?>
                 </small> 
-                <a href="./register.php">Creeaza-ti un cont!</a>
+                <div class="form-group">
+                    <a href="./register.php">Creeaza-ti un cont!</a><br>
+                    <a href="./reset.php">Reseteaza-ti parola!</a>
+                </div>
 
                 <a class="btn btn-outline-dark" 
                     <?php echo 'href="'.$client->createAuthUrl().'"' ?>  

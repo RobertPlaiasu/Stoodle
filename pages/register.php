@@ -1,7 +1,6 @@
 <?php
     include 'functii/functii.php';
     include 'autoloader/autoloader.php';
-    require_once './folderlogin/google-config.php';
     session_start();
     if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
     header("Location: ./homePage.php");
