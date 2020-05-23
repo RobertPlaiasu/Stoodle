@@ -93,27 +93,25 @@ class User extends Database
             header("Location: ./formularTemplate.php");
             exit();
         }
-        else 
-        {
             //public all
-            $this->idUser = $arrayUserInformation['id_user'];
-            $this->firstNameUser = $arrayUserInformation['first_name_user'];
-            $this->lastNameUser = $arrayUserInformation['name_user'];
-            $this->profilUser = $arrayUserInformation['profil_user'];
-            $this->passionUser = $arrayUserInformation['passion_user'];
-            $this->passionIntensityUser = $arrayUserInformation['passion_intensity_user'];
-            $this->jobUser = $arrayUserInformation['job_user'];
-            $this->subject1User = $arrayUserInformation['subject1_user'];
-            $this->subject2User = $arrayUserInformation['subject2_user'];
-            $this->subject3User = $arrayUserInformation['subject3_user'];
-            $this->booksUser = $arrayUserInformation['books_user'];
-            $this->sportUser = $arrayUserInformation['sport_user'];
-            $this->socialUser = $arrayUserInformation['social_user'];
-            $this->stressUser = $arrayUserInformation['stress_user'];
-            $this->countyUser = $arrayUserInformation['county_user'];
-            $this->pictureUser = $arrayUserInformation['picture_user'];
+        $this->idUser = $arrayUserInformation['id_user'];
+        $this->firstNameUser = $arrayUserInformation['first_name_user'];
+        $this->lastNameUser = $arrayUserInformation['name_user'];
+        $this->profilUser = $arrayUserInformation['profil_user'];
+        $this->passionUser = $arrayUserInformation['passion_user'];
+        $this->passionIntensityUser = $arrayUserInformation['passion_intensity_user'];
+        $this->jobUser = $arrayUserInformation['job_user'];
+        $this->subject1User = $arrayUserInformation['subject1_user'];
+        $this->subject2User = $arrayUserInformation['subject2_user'];
+        $this->subject3User = $arrayUserInformation['subject3_user'];
+        $this->booksUser = $arrayUserInformation['books_user'];
+        $this->sportUser = $arrayUserInformation['sport_user'];
+        $this->socialUser = $arrayUserInformation['social_user'];
+        $this->stressUser = $arrayUserInformation['stress_user'];
+        $this->countyUser = $arrayUserInformation['county_user'];
+        $this->pictureUser = $arrayUserInformation['picture_user'];
 
-        }
+        
 
     }
 

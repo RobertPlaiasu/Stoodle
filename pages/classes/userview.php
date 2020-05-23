@@ -10,10 +10,10 @@ class UserView extends User
     private $collegesAll;
 
     //messages for form errors
-    public function getMainErrorMessage ($errorType, $message)
+    public function getMainErrorMessage (string $errorType,string $message)
     {
 
-        if(isset($_GET['error']) && $_GET['error']==$errorType)
+        if(isset($_GET['error']) && $_GET['error'] === $errorType)
             echo $message;
           
     }
@@ -21,7 +21,7 @@ class UserView extends User
     public function getSecondErrorMessage ($errorType, $message) 
     {
 
-        if(isset($_GET['error']) && $_GET['error']==$errorType)
+        if(isset($_GET['error']) && $_GET['error'] == $errorType)
           echo '<div class="alert alert-danger" role="alert">'.$message.'</div>';
           
     }
