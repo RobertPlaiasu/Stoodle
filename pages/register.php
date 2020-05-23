@@ -1,12 +1,13 @@
 <?php
-    include 'functii/functii.php';
+    
     include 'autoloader/autoloader.php';
-    require_once './folderlogin/google-config.php';
-    session_start();
-    if(isset($_SESSION['mailUser']) || isset($_SESSION['mailGmail'])){
-    header("Location: ./homePage.php");
-    exit();
-    }
+    
+
+    $user = new UserView();
+
+    $user->checkConnectedUserIsset();
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -31,12 +32,12 @@
             <form action="folderlogin/signupphp.php" method="post">
                 <div class="form-group">
                     <?php
-                        getSecondErrorMessage("mysqlerror","Eroare baza de date!");
-                        getSecondErrorMessage("invalidlink","Link-ul este invalid!");
-                        getSecondErrorMessage("expire","Timpul pentru verificarea adresei de email a fost depasit trebuie sa completezi din nou formularul!");
-                        getSecondErrorMessage("alttoken","Tokenul nu este bun!");
-                        getSecondErrorMessage("eroaregenerala","Eroare aplicatie!");
-                        getSuccesMessage("register","Te-ai inregistrat cu succes!Acum verifica adresa ta de email!");
+                        $user->getSecondErrorMessage("mysqlerror","Eroare baza de date!");
+                        $user->getSecondErrorMessage("invalidlink","Link-ul este invalid!");
+                        $user->getSecondErrorMessage("expire","Timpul pentru verificarea adresei de email a fost depasit trebuie sa completezi din nou formularul!");
+                        $user->getSecondErrorMessage("alttoken","Tokenul nu este bun!");
+                        $user->getSecondErrorMessage("eroaregenerala","Eroare aplicatie!");
+                        $user->getSuccesMessage("register","Te-ai inregistrat cu succes!Acum verifica adresa ta de email!");
                     ?>
 
                     <input type="text" name="username" class="form-control" placeholder=" " id="username">
@@ -44,9 +45,9 @@
                 </div>
                 <small>
                     <?php
-                        getMainErrorMessage("emptyfieldnume","Completeaza toate campurile!");
-                        getMainErrorMessage("invalidnume","Se pot folosi doar litere ale alfabetui englez!");
-                        getMainErrorMessage("marenume","Numele este prea lung"); //TODO ROBERT: Daca isi face vreun indian cont? (numele lor sunt foarte lungi)
+                        $user->getMainErrorMessage("emptyfieldnume","Completeaza toate campurile!");
+                        $user->getMainErrorMessage("invalidnume","Se pot folosi doar litere ale alfabetui englez!");
+                        $user->getMainErrorMessage("marenume","Numele este prea lung"); //TODO ROBERT: Daca isi face vreun indian cont? (numele lor sunt foarte lungi)
                     ?>
                 </small>
 
@@ -56,10 +57,10 @@
                 </div>
                 <small>
                     <?php
-                        getMainErrorMessage("emptyfieldemail","Completeaza toate campurile!");
-                        getMainErrorMessage("invalidmail","Email-ul este invalid");
-                        getMainErrorMessage("mailother","Email-ul si confirmare email");
-                        getMainErrorMessage("mailluat","Adresa de email este deja inregistrata!");
+                        $user->getMainErrorMessage("emptyfieldemail","Completeaza toate campurile!");
+                        $user->getMainErrorMessage("invalidmail","Email-ul este invalid");
+                        $user->getMainErrorMessage("mailother","Email-ul si confirmare email");
+                        $user->getMainErrorMessage("mailluat","Adresa de email este deja inregistrata!");
                     ?>
                 </small>
 
@@ -69,8 +70,8 @@
                 </div>
                 <small>
                     <?php
-                        getMainErrorMessage("emptyfieldemailrepeat","Completeaza toate campurile!");
-                        getMainErrorMessage("invalidmailrepeat","Email-ul este invalid!");
+                        $user->getMainErrorMessage("emptyfieldemailrepeat","Completeaza toate campurile!");
+                        $user->getMainErrorMessage("invalidmailrepeat","Email-ul este invalid!");
                     ?>
                 </small>
 
@@ -80,13 +81,13 @@
                 </div>
                 <small>
                     <?php
-                        getMainErrorMessage("emptyfieldpass","Completeaza toate campurile!");
-                        getMainErrorMessage("invalidpassw","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
-                        getMainErrorMessage("micpassw","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
-                        getMainErrorMessage("marepassw","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
-                        getMainErrorMessage("identicpasswnume","Parola este asemanatoare  cu numele!");
-                        getMainErrorMessage("identicpasswprenume","Parola este asemanatoare  cu prenumele!");
-                        getMainErrorMessage("passwdother","Parola este diferita fata de cofirmare parola!");
+                        $user->getMainErrorMessage("emptyfieldpass","Completeaza toate campurile!");
+                        $user->getMainErrorMessage("invalidpassw","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
+                        $user->getMainErrorMessage("micpassw","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
+                        $user->getMainErrorMessage("marepassw","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
+                        $user->getMainErrorMessage("identicpasswnume","Parola este asemanatoare  cu numele!");
+                        $user->getMainErrorMessage("identicpasswprenume","Parola este asemanatoare  cu prenumele!");
+                        $user->getMainErrorMessage("passwdother","Parola este diferita fata de cofirmare parola!");
                     ?>
                 </small>
 
@@ -96,10 +97,10 @@
                 </div>
                 <small>
                     <?php
-                        getMainErrorMessage("emptyfieldpassrepeat","Completeaza toate campurile!");
-                        getMainErrorMessage("micpasswrepeat","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
-                        getMainErrorMessage("marepasswrepeat","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
-                        getMainErrorMessage("invalidpasswrepeat","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
+                        $user->getMainErrorMessage("emptyfieldpassrepeat","Completeaza toate campurile!");
+                        $user->getMainErrorMessage("micpasswrepeat","Parola este prea sccurta trebuie sa aiba minim 8 caractere!");
+                        $user->getMainErrorMessage("marepasswrepeat","Parola este prea lunga poate sa aiba maxim 32 de caractere!");
+                        $user->getMainErrorMessage("invalidpasswrepeat","Pentru parola se pot folosi doar cifre si litere ale alfabetului englez!");
                     ?>
                 </small>
 
