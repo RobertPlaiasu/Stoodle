@@ -23,18 +23,18 @@
 
     <body>
         <div class="container">
+            <?php
+                $user->getSecondErrorMessage("sqlierror","Eroare server!");
+                $user->getSecondErrorMessage("fatalerrorsql","Eroare aplicatie!");
+                $user->getSuccesMessage("resetare","Parola a fost schimbata");
+                $user->getSuccesMessage("register","Verifica adresa de email pentru a te putea loga!");
+            ?>
             <div id="headline">
                 <img src="./Images/logo.png" alt="Logo">
                 <h1>Autentificare</h1>
             </div>
             <form action="folderlogin/loginphp.php" method="post">
                 <div class="form-group">
-                    <?php
-                        $user->getSecondErrorMessage("sqlierror","Eroare server!");
-                        $user->getSecondErrorMessage("fatalerrorsql","Eroare aplicatie!");
-                        $user->getSuccesMessage("resetare","Parola a fost schimbata");
-                        $user->getSuccesMessage("register","Verifica adresa de email pentru a te putea loga!");
-                    ?>
                     <input type="email" name="mail" class="form-control" placeholder=" " id="email" />
                     <label for="email">Email</label>
                 </div>

@@ -22,18 +22,18 @@
     </head>
     <body>
         <div class="container">
+            <?php
+                getSecondErrorMessage("mysqlerror","Eroare baza de date!");
+                getSecondErrorMessage("expire","Link-ul a expirat");
+                getSecondErrorMessage("nouser","Nu exista cont!");
+                getSuccesMessage("resetmail","Mail-ul pentru resetarea parolei a fost trimis!");
+            ?>
             <div id="headline">
                 <img src="./Images/logo.png" alt="Logo">
                 <h1>Resetare parola</h1>
             </div>
             <form action="foldereset/resetphp.php" method="post">
                 <div class="form-group">
-                    <?php
-                        getSecondErrorMessage("mysqlerror","Eroare baza de date!");
-                        getSecondErrorMessage("expire","Link-ul a expirat");
-                        getSecondErrorMessage("nouser","Nu exista cont!");
-                        getSuccesMessage("resetmail","Mail-ul pentru resetarea parolei a fost trimis!");
-                    ?>
                     <input type="email" name="email" class="form-control" placeholder=" " id="email">
                     <label for="email">E-mail pentru resetarea parolei</label>
                 </div>
