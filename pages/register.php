@@ -25,20 +25,20 @@
 
     <body>
         <div class="container">
+            <?php
+                $user->getSecondErrorMessage("mysqlerror","Eroare baza de date!");
+                $user->getSecondErrorMessage("invalidlink","Link-ul este invalid!");
+                $user->getSecondErrorMessage("expire","Timpul pentru verificarea adresei de email a fost depasit trebuie sa completezi din nou formularul!");
+                $user->getSecondErrorMessage("alttoken","Tokenul nu este bun!");
+                $user->getSecondErrorMessage("eroaregenerala","Eroare aplicatie!");
+                $user->getSuccesMessage("register","Te-ai inregistrat cu succes!Acum verifica adresa ta de email!");
+            ?>
             <div id="headline">
                 <img src="./Images/logo.png" alt="Logo">
                 <h1>Inregistrare</h1>
             </div>
             <form action="folderlogin/signupphp.php" method="post">
                 <div class="form-group">
-                    <?php
-                        $user->getSecondErrorMessage("mysqlerror","Eroare baza de date!");
-                        $user->getSecondErrorMessage("invalidlink","Link-ul este invalid!");
-                        $user->getSecondErrorMessage("expire","Timpul pentru verificarea adresei de email a fost depasit trebuie sa completezi din nou formularul!");
-                        $user->getSecondErrorMessage("alttoken","Tokenul nu este bun!");
-                        $user->getSecondErrorMessage("eroaregenerala","Eroare aplicatie!");
-                        $user->getSuccesMessage("register","Te-ai inregistrat cu succes!Acum verifica adresa ta de email!");
-                    ?>
 
                     <input type="text" name="username" class="form-control" placeholder=" " id="username">
                     <label for="username">Nume de utilizator</label> <!-- NU UITA CA ACUM AVEM DOAR USERNAME -->
