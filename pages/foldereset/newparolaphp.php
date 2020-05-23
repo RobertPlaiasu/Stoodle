@@ -6,8 +6,8 @@ if(!isset($_POST['submit-parola-reset'])){
 
 $select=$_POST['select'];
 $token=$_POST['token'];
-$parola=$_POST['resetparola'];
-$confparola=$_POST['resetconfirmareparola'];
+$parola=$_POST['password'];
+$confparola=$_POST['confirmPassword'];
 
 function asemanariParola($nume,$prenume,$password,$password_repeat,$select,$token){
   if (strpos(strtolower($nume),strtolower($password))!==false || 
