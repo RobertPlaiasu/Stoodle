@@ -30,6 +30,8 @@ class User extends Database
 
     function __construct()
     {
+        session_start();
+
         if(isset($_SESSION['mail']))
             $this->emailUser = $_SESSION['mail'];
         if(isset($_SESSION['type']))

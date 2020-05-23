@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require_once './folderlogin/google-config.php';
     include 'autoloader/autoloader.php';
 
