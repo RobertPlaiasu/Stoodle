@@ -9,7 +9,6 @@ if (!isset($_POST['loginsubmit'])){
 
 $mailuserid = $_POST['mailus'];
 $password = $_POST['passw'];
-$checkbox=$_POST['checkbox'];
 
 function fieldEmpty($var,$mailuserid,$msg){
   if (empty($var)) {
@@ -73,7 +72,6 @@ if (!$password_verify)
 $_SESSION['mail'] = $valori['mail'];
 $_SESSION['type'] = $valori['type'];
 
-if ($checkbox==1) {
 
   $mysql="DELETE FROM auth WHERE userid=".$valori['idUser'];
   mysqli_query($connection,$mysql);
@@ -89,7 +87,7 @@ if ($checkbox==1) {
 
   setcookie("select", $selector,$date,"/");
   setcookie("validator",$token,$date,"/");
-}
+
 
 header("Location: ../home.php");
 exit();

@@ -34,7 +34,7 @@
                         $user->getSuccesMessage("resetare","Parola a fost schimbata");
                         $user->getSuccesMessage("register","Verifica adresa de email pentru a te putea loga!");
                     ?>
-                    <input type="email" class="form-control" placeholder=" " id="email" />
+                    <input type="email" name="mailus" class="form-control" placeholder=" " id="email" />
                     <label for="email">Email</label>
                 </div>
                 <small class="form-text alert-note">
@@ -45,7 +45,7 @@
                     ?>
                 </small>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder=" " id="password" />
+                    <input type="password" name="passw" class="form-control" placeholder=" " id="password" />
                     <label for="password">Parola</label>
                        
                 </div>
