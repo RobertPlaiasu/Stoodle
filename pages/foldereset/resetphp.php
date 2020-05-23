@@ -8,7 +8,7 @@ if(!isset($_POST['submit-reset'])){
   header("Location: ../login.php");
 }
 
-$email=$_POST['mailreset'];
+$email=$_POST['email'];
 $select=bin2hex(random_bytes(12));
 $token=bin2hex(random_bytes(32));
 
