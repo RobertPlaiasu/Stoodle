@@ -57,6 +57,7 @@ form{
     transition: transform 400ms;
 }
 
+.focus-group > input:focus + label,
 .form-group:focus-within > label,
 .form-group > input:not(:placeholder-shown) + label{
     transform: scale(.8) translateY(-5rem);
@@ -71,10 +72,6 @@ form{
     color: var(--black);
     font-weight: bold;
     font-size: .8rem;
-}
-
-.form-group > input:invalid + .form-group:focus-within::after{
-    border-color: red;
 }
 
 small{
