@@ -7,8 +7,8 @@ if (!isset($_POST['loginsubmit'])){
   exit();
 }
 
-$mailuserid = $_POST['mailus'];
-$password = $_POST['passw'];
+$mailuserid = $_POST['mail'];
+$password = $_POST['password'];
 
 function fieldEmpty($var,$mailuserid,$msg){
   if (empty($var)) {

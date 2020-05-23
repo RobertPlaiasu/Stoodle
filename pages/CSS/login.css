@@ -19,10 +19,16 @@ body, html{
     color: var(--black);
 }
 
+form{
+    max-width: 420px;
+    width: 100%;
+}
+
 .form-group{
     position: relative;
-    padding: .75em;
+    padding: .75em .75em 0;
     margin-top: .7em;
+    margin-bottom: 0;
 }
 
 .form-group input{

@@ -35,10 +35,10 @@
                         $user->getSuccesMessage("resetare","Parola a fost schimbata");
                         $user->getSuccesMessage("register","Verifica adresa de email pentru a te putea loga!");
                     ?>
-                    <input type="email" name="mailus" class="form-control" placeholder=" " id="email" />
+                    <input type="email" name="mail" class="form-control" placeholder=" " id="email" />
                     <label for="email">Email</label>
                 </div>
-                <small class="form-text alert-note">
+                <small>
                     <?php
                         $user->getMainErrorMessage("emptymail",'Completeaza campul !');
                         $user->getMainErrorMessage("nuUser",'Email-ul nu a fot gasit!');
@@ -46,15 +46,15 @@
                     ?>
                 </small>
                 <div class="form-group">
-                    <input type="password" name="passw" class="form-control" placeholder=" " id="password" />
+                    <input type="password" name="password" class="form-control" placeholder=" " id="password" />
                     <label for="password">Parola</label>
                        
                 </div>
-                <small class="form-text alert-note">
+                <small>
                     <?php
                         $user->getMainErrorMessage("emptypass","Completeaza campul");
                         $user->getMainErrorMessage("invalidpassw","Pentru parola se folosesc doar 
-                                                                   caractere a alfabetui englez si cifrele de la 0-9!");
+                                                    caractere a alfabetui englez si cifrele de la 0-9!");
                         $user->getMainErrorMessage("parolagresita","Combinatia email si parola este gresita");
                     ?>
                 </small> 
@@ -68,7 +68,7 @@
                     Login with Google
                 </a>
                 
-                <input type="submit" name="loginsubmit" class="button" />
+                <input type="submit" name="loginsubmit" value="Trimite" class="button" />
             </form>
         </div>
     </body>
