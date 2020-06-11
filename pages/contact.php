@@ -1,11 +1,10 @@
 <?php
-require './folderlogin/datacon.php';
+
 session_start();
-if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
-    header("Location: ../index.php");
-    exit();
-}
+require_once "header.php";
+
 ?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -15,34 +14,14 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
         <link rel="stylesheet" href="./CSS/navbar.css">
         <link rel="stylesheet" href="./CSS/contact.css">
         <link rel="stylesheet" href="./CSS/base.css">
+        <link rel="icon" href="../logo.ico" type="image/x-icon" />
         <script src="https://kit.fontawesome.com/0dfb644902.js" crossorigin="anonymous"></script>
         <title>Stoodle</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a href="#">
-                <?php
-                if (isset($_SESSION['mailUser'])){
-                  $mail=$_SESSION['mailUser'];
-                  $sql = "SELECT * FROM `users` WHERE `mailUser` = '$mail'";
-                }
-
-                if (isset($_SESSION['mailGmail'])){
-                  $mail=$_SESSION['mailGmail'];
-                  $sql = "SELECT * FROM `users_gmail` WHERE `mailGmail` = '$mail'";
-                }
-                $result = mysqli_query($connection,$sql);
-                $myArray = array();
-                if (mysqli_num_rows($result) > 0) {
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {
-                      if (isset($_SESSION['mailUser']))
-                        print "Salut, ".$row['Prenume'];
-                      else
-                        print "Salut, ".$row['prenumeGmail'];
-                    }
-                }
-                ?>
+            <a href="/">
+                <?php require_once "navbar.php" ?>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon">☰</span>
@@ -111,6 +90,5 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="./JS/navbar.js"></script>
     </body>
 </html>

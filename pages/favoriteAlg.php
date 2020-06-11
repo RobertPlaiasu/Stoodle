@@ -24,5 +24,6 @@ if(isset($_POST['scoatere_fav'])){
     header("Location: ./favorite.php");
     exit();
 }
+
 header("Location: ./homePage.php");
 exit();

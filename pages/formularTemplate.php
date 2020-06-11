@@ -1,10 +1,35 @@
 <?php
 
-include 'array.php';
 include 'functii/functii.php';
-session_start();
 require_once './folderlogin/datacon.php';
 
+session_start();
+
+function checkTokens($select, $token){
+    // If the tokens are empty and consists of all hexadecimal digits.
+    if( empty($select) || empty($token) || !(ctype_xdigit($select) || !ctype_xdigit($token))){
+        header("Location: ./register.php?error=invalidlink");
+        exit();
+    }
+}
+
+function checkDatabase($stmt, $mysql){
+    if (!mysqli_stmt_prepare($stmt,$mysql))
+    {
+        header("Location: ./register.php?error=mysqlerror");
+        exit();
+    }
+}
+
+function checkPassword($token, $tokenVerificare){
+
+    $ok=password_verify($token, $tokenVerificare);
+    if(!$ok){
+        header("Location: ./register.php?error=alttoken");
+        exit();
+    }
+
+}
 
 if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
 
@@ -12,69 +37,47 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
     $token=$_GET['valid'];
     $date=date("U");
 
-    if(empty($select)||empty($token)){
-        header("Location: ./register.php?error=invalidlink");
-        exit();
-    }
-    if(ctype_xdigit($select)===true && ctype_xdigit($token)===true){
+    checkTokens($select, $token);
 
-        $mysql="SELECT * FROM users_verificare WHERE expireVerificare>=? AND selectVerificare =?";
+    $mysql="SELECT * FROM users_verificare WHERE expireVerificare>=? AND selectVerificare =?";
+    $stmt=mysqli_stmt_init($connection);
+    
+    checkDatabase($stmt, $mysql);
+
+    mysqli_stmt_bind_param($stmt,"ss",$date,$select);
+    mysqli_stmt_execute($stmt);
+    $rezultat=mysqli_stmt_get_result($stmt);
+
+    if(!$rand=mysqli_fetch_assoc($rezultat))
+    {
+        $mysql="DELETE FROM users_verificare WHERE selectVerificare=?;";
         $stmt=mysqli_stmt_init($connection);
-        if (!mysqli_stmt_prepare($stmt,$mysql))
-        {
-            header("Location: ./register.php?error=mysqlerror");
-            exit();
-        }
-        mysqli_stmt_bind_param($stmt,"ss",$date,$select);
+
+        checkDatabase($stmt, $mysql);
+
+        mysqli_stmt_bind_param($stmt,"s",$select);
         mysqli_stmt_execute($stmt);
-        $rezultat=mysqli_stmt_get_result($stmt);
-        if(!$rand=mysqli_fetch_assoc($rezultat))
-        {
-            $mysql="DELETE FROM users_verificare WHERE selectVerificare=?;";
-            $stmt=mysqli_stmt_init($connection);
-            if (!mysqli_stmt_prepare($stmt,$mysql))
-            {
-                header("Location: ./register.php?error=mysqlerror");
-                exit();
-            }
-            mysqli_stmt_bind_param($stmt,"s",$select);
-            mysqli_stmt_execute($stmt);
-            header("Location: ./register.php?error=expire");
-            exit();
-        }
-        $ok=password_verify($token,$rand['tokenVerificare']);
-        if($ok===false){
-            header("Location: ./register.php?error=alttoken");
-            exit();
-        }
-        elseif($ok===true)
-        {
 
-            $mysql="INSERT INTO users(Nume,Prenume,mailUser,pwdUsers) VAlUES(?,?,?,?) ";
-            $stmt=mysqli_stmt_init($connection);
-            if (!mysqli_stmt_prepare($stmt,$mysql)) {
-                header("Location: ./register.php?error=mysqlerror&select=".$select."&valid=".$token);
-                exit();
-            }
-            mysqli_stmt_bind_param($stmt,"ssss",$rand['numeVerificare'],$rand['prenumeVerificare'],$rand['mailVerificare'],$rand['parolaVerificare']);
-            mysqli_stmt_execute($stmt);
-
-
-            $id=$rand['idVerificare'];
-            $_SESSION['mailUser']=$rand['mailVerificare'];
-            $mysql="DELETE FROM users_verificare WHERE idVerificare='$id'";
-            mysqli_query($connection,$mysql);
-
-        }
-        else {
-            header("Location: ./register.php?error=eroaregenerala");
-            exit();
-        }
-    }
-    else {
-        header("Location: ./register.php?error=invalidlink");
+        header("Location: ./register.php?error=expire");
         exit();
     }
+
+    checkPassword($token, $rand['tokenVerificare']);
+    
+    $mysql="INSERT INTO users(Nume,Prenume,mailUser,pwdUsers) VAlUES(?,?,?,?) ";
+    $stmt=mysqli_stmt_init($connection);
+
+    checkDatabase($stmt, $mysql);
+
+    mysqli_stmt_bind_param($stmt,"ssss",$rand['numeVerificare'],$rand['prenumeVerificare'],$rand['mailVerificare'],$rand['parolaVerificare']);
+    mysqli_stmt_execute($stmt);
+
+    $id=$rand['idVerificare'];
+    $_SESSION['mailUser']=$rand['mailVerificare'];
+
+    $mysql="DELETE FROM users_verificare WHERE idVerificare='$id'";
+    mysqli_query($connection,$mysql);
+
 }
 
 
@@ -88,182 +91,94 @@ if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="./CSS/variabiles.css">
-        <link rel="stylesheet" href="./CSS/base.css">
-        <title>Stoodle</title>
+        <link rel="stylesheet" href="./CSS/formular.css">
+        <link rel="icon" href="../logo.ico" type="image/x-icon" />
+        <title>Stoodle | Formular</title>
     </head>
 
-    <body style="overflow: hidden;">
-        <style>
-            label {
-                font-size: 4em;
-                margin: 4rem 0;
-                text-align: center
-            }
-            select{
-                padding: 1rem;
-            }
-        </style>
-      <?php
-      erore2('materii','Trebuie sa mai completezi inca o data formularul pentru ca ca 2 materii sunt asemanatoare!');
-       ?>
+    <body>
+        <div class="container">
+        <h1>Bun venit in familia Stoodle!</h1>
+        <p>Completeaza formularul de mai jos pentru a putea termina inregistrarea.</p>
         <form action="./formular.php" method="post" id="formular">
-
-            <div class="row" style="height:100vh">
-                <div class="col flex-column d-flex justify-content-center align-items-center" style="height:100vh">
-                    <label>De ce esti pasionat?</label>
-                    <select name="pasiune">
-                        <?php
-                        foreach ($array_pasiune as $tip)
-                            echo "<option value='".$tip."'>".$tip."</option>";
-                        ?>
-                    </select>
-                    <input type="button" value="Urmatoare intrebare" onclick="nextQuestion()" class="button">
-                </div>
+            <div class="form-group">
+                <label for="passion">De ce esti pasionat?</label>
+                <select class="custom-select" id="passionSelect" name="passion"></select>
             </div>
-
-            <div class="row" style="height:100vh">
-                <div class="col flex-column d-flex justify-content-center align-items-center" style="height:100vh">
-                    <label>Cat de mult esti pasionat pe o scara de la 1 la 5 ?</label>
-                    <select name="intensitate_pasiune">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-
-                    <input type="button" onclick="nextQuestion()" class="button" value="Urmatoare intrebare">
-                </div>
+            <div class="form-group">
+            <label for="passion-metter">Cat de pasionat esti?</label> <br>
+                <input class="radio" type="radio" name="passionIntensity" id="budget-1" value="1" checked>
+                    <label class="for-radio" for="budget-1">
+                        <span data-hover="1">1</span>
+                    </label>
+                <input class="radio" type="radio" name="passionIntensity" id="budget-2" value="2">
+                    <label class="for-radio" for="budget-2">							
+                        <span data-hover="2">2</span>
+                    </label>    
+                <input class="radio" type="radio" name="passionIntensity" id="budget-3" value="3">
+                    <label class="for-radio" for="budget-3">							
+                        <span data-hover="3">3</span>
+                    </label>
+                <input class="radio" type="radio" name="passionIntensity" id="budget-4" value="4">
+                    <label class="for-radio" for="budget-4">							
+                        <span data-hover="4">4</span>
+                    </label>
+                <input class="radio" type="radio" name="passionIntensity" id="budget-5" value="5">
+                    <label class="for-radio" for="budget-5">							
+                        <span data-hover="5">5</span>
+                    </label>
             </div>
-
-            <div class="row" style="height:100vh">
-                <div class="col flex-column d-flex justify-content-center align-items-center" style="height:100vh">
-                    <label>Vrei un part-time job?</label>
-                    <select name="job">
-                        <option value="0">Da</option>
-                        <option value="1">Nu</option>
-                    </select>
-                    <input type="button" onclick="nextQuestion()" class="button" value="Urmatoare intrebare">
-                </div>
-
+            <div class="form-group">
+                <label for="classes">Ce materii iti plac?</label>
+                <select class="custom-select mb-2 classSelect" name="class-1" class="classSelect"></select>
+                <select class="custom-select mb-2 classSelect" name="class-2" class="classSelect"></select>
+                <select class="custom-select mb-2 classSelect" name="class-3" class="classSelect"></select>
             </div>
-
-            <div class="row" style="height:100vh">
-                <div class="col flex-column d-flex justify-content-center align-items-center" style="height:100vh">
-                    <label>Care sunt materiile tale preferate ?(Sa nu fie toate la fel)</label>
-                    <select name="materie1">
-                        <?php
-                        foreach ($array_materie as $materie)
-                            echo "<option value='".$materie."'>".$materie."</option>";
-                        ?>
-                    </select>
-                    <select name="materie2">
-                        <?php
-                        foreach ($array_materie1 as $materie)
-                            echo "<option value='".$materie."'>".$materie."</option>";
-                        ?>
-                    </select>
-                    <select name="materie3">
-                        <?php
-                        foreach ($array_materie1 as $materie)
-                            echo "<option value='".$materie."'>".$materie."</option>";
-                        ?>
-                    </select>
-                    <input type="button" onclick="nextQuestion()" class="button" value="Urmatoare intrebare">
-                </div>
+            <div class="form-group">
+                <label for="branch">Pe ce profil esti?</label>
+                <select class="custom-select" name="branch" id="branchSelect"></select>
             </div>
-
-            <div class="row" style="height:100vh">
-                <div class="col flex-column d-flex justify-content-center align-items-center">
-                    <div class="col flex-column d-flex justify-content-center align-items-center" style="height:100vh">
-                        <label>Ce tip de carti iti place sa citesti?</label>
-                        <select name="carti">
-                            <?php
-                            foreach ($array_carti as $tip)
-                                echo "<option value='".$tip."'>".$tip."</option>";
-                            ?>
-                        </select>
-                        <input type="button" onclick="nextQuestion()" class="button" value="Urmatoare intrebare">
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="stress">Poti face fata unor situatii strsante?</label>
+                <select class="custom-select" name="stress" id="passionSelect">
+                    <option value="1">Da</option>
+                    <option value="0">Nu</option>
+                </select>
             </div>
-
-            <div class="row" style="height:100vh">
-                <div class="col flex-column d-flex justify-content-center align-items-center" style="height:100vh">
-                    <label>Din ce judet esti?</label>
-                    <select name="judet">
-                        <?php
-                        foreach ($array_judet as $tip)
-                            echo "<option value='".$tip."'>".$tip."</option>";
-                        ?>
-                    </select>
-                    <input type="button" onclick="nextQuestion()" class="button" value="Urmatoare intrebare">
-                </div>
+            <div class="form-group">
+                <label for="job">Iti doresti un part-time job?</label>
+                <select class="custom-select" name="job" id="jobSelect">
+                    <option value="1">Da</option>
+                    <option value="0">Nu</option>
+                </select>
             </div>
-
-            <div class="row" style="height:100vh">
-                <div class="col flex-column d-flex justify-content-center align-items-center" style="height:100vh">
-                    <label>Te consideri o persoana sociabila?</label>
-                    <select name="social">
-                        <option value="1">Da</option>
-                        <option value="0">Nu</option>
-                    </select>
-                    <input type="button" onclick="nextQuestion()" class="button" value="Urmatoare intrebare">
-                </div>
+            <div class="form-group">
+                <label for="books">Ce tip de carti citesti?</label>
+                <select class="custom-select" name="books" id="booksSelect"></select>
             </div>
-
-            <div class="row" style="height:100vh">
-                <div class="col flex-column d-flex justify-content-center align-items-center" style="height:100vh">
-                    <label>Practici vreun sport ?</label>
-                    <select name="sport">
-                        <option value="1">Da</option>
-                        <option value="0">Nu</option>
-                    </select>
-                    <input type="button" onclick="nextQuestion()" class="button" value="Urmatoare intrebare">
-                </div>
+            <div class="form-group">
+                <label for="county">Din ce judet esti?</label>
+                <select class="custom-select" name="county" id="countyPassion"></select>
             </div>
-
-            <div class="row" style="height:100vh">
-                <div class="col flex-column d-flex justify-content-center align-items-center" style="height:100vh">
-                    <label>Pe ce profil esti ?</label>
-                    <select name="profil">
-                        <?php
-                        foreach ($array_profil as $tip)
-                            echo "<option value='".$tip."'>".$tip."</option>";
-                        ?>
-                    </select>
-                    <input type="button" onclick="nextQuestion()" class="button" value="Urmatoare intrebare">
-                </div>
+            <div class="form-group">
+                <label for="social">Te consideri o persoana sociabila?</label>
+                <select class="custom-select" name="social" id="socialSelect">
+                    <option value="1">Da</option>
+                    <option value="0">Nu</option>   
+                </select>
             </div>
-
-            <div class="row" style="height:100vh">
-                <div class="col flex-column d-flex justify-content-center align-items-center" style="height:100vh">
-                    <label>Consideri ca poti ca poti face fata unor situatii foarte stresante?</label>
-                    <select name="stres">
-                        <option value="1">Da</option>
-                        <option value="0">Nu</option>
-                    </select>
-                    <br />
-
-                    <input type="submit" value="Trimite Formular" name="formularsubmit" class="button">
-                </div>
+            <div class="form-group">
+                <label for="sport">Practici vreun sport?</label>
+                <select class="custom-select" name="sport" id="sportSelect">
+                    <option value="1">Da</option>
+                    <option value="0">Nu</option>                       
+                </select>
             </div>
-
+            <input type="submit" value="Trimite Formular" name="formularsubmit" class="button">
         </form>
-
-        <script>
-            var questions = document.getElementById("formular").children;
-            var index = 0;
-
-            function nextQuestion(select_name) {
-                questions[index].style.display = "none";
-                $(questions[index]).addClass("hidden");
-                index += 1;
-            }
-          </script>
-          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-   </body>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="./JS/formular.js"></script>
     </body>
 
 </html>
