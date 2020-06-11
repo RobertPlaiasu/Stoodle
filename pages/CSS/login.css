@@ -1,39 +1,88 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,700;1,400&display=swap');
-body, html {
-    overflow: hidden!important;
-    background: url("../Images/background.jpg")!important;
-    background-size: cover;
+@import url('./base.css');
+
+body, html{
+    min-height: 100vh;
+
 }
 
-#text {
-    color: var(--white);
-    margin: 3rem 4rem;
-    font-family: 'Barlow', sans-serif;
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-#text h1 {
-    text-transform: uppercase;
-    margin: 0;
+#headline{
+    text-align: center;
+    color: var(--black);
 }
 
-#content {
-    background-color: var(--white);
-    height: 100vh;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-.button {
-    background-color: #283054!important;
+form{
+    max-width: 420px;
     width: 100%;
-    margin: 0!important;
 }
 
-.button:hover {
-    background-color: var(--yellow)!important;
+.form-group{
+    position: relative;
+    padding: .75em .75em 0;
+    margin-top: .7em;
+    margin-bottom: 0;
 }
 
-small {
-    color: var(--red)!important;
-    font-weight: 700!important;
+.form-group input{
+    font-family: inherit;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 2px dashed grey;
+    outline: 0;
+    font-size: 1.3rem;
+    color: var(--black);
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.7s;
+}
+
+.form-group input:invalid{
+    color: var(--red);
+}
+
+.form-group input:placeholder-shown ~ label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+}
+
+.form-group input:focus{
+    padding-bottom: 6px;  
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(90deg, var(--green) 0%, var(--light-green) 100%);;
+    border-image-slice: 1;
+    transition: border-image 700ms ease;
+}
+
+.form-group input:focus ~ label{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: grey;
+    font-weight:700;
+}
+
+.form-group label{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: grey;
+}
+
+small{
+    color: var(--red);
+    font-weight: 800!important;
 }

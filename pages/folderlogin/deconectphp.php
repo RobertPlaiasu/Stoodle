@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 function deconect(){
   session_unset();
   session_destroy();
@@ -8,11 +9,13 @@ function deconect(){
   header("Location: ../../index.php?logout=succes");
   exit();
 }
-  if(isset($_SESSION['mailUser']))
+
+if(isset($_SESSION['mailUser']))
   deconect();
-  if (isset($_SESSION['mailGmail'])) {
-    require_once 'google-config.php';
-    unset($_SESSION['acces_token']);
-    $client->revokeToken();
-    deconect();
-  }
+  
+if (isset($_SESSION['mailGmail'])) {
+  require_once 'google-config.php';
+  unset($_SESSION['acces_token']);
+  $client->revokeToken();
+  deconect();
+}

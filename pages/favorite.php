@@ -1,33 +1,38 @@
 <?php
 require './folderlogin/datacon.php';
-
 session_start();
+
 if(empty($_SESSION['mailUser']) && empty($_SESSION['mailGmail'])){
     header("Location: ../index.php");
     exit();
 }
+
 if(isset($_SESSION['mailUser']))
 {
     $mail = $_SESSION['mailUser'];
     $mysql="SELECT * FROM users WHERE mailUser=?";
 }
+
 if(isset($_SESSION['mailGmail']))
 {
     $mail = $_SESSION['mailGmail'];
     $mysql="SELECT * FROM users_gmail WHERE mailGmail=?";
 }
+
 $stmt = mysqli_stmt_init($connection);
 if (!mysqli_stmt_prepare($stmt, $mysql))
 {
     header("Location: ../index.php");
     exit();
 }
+
 mysqli_stmt_bind_param($stmt, "s", $mail);
 mysqli_stmt_execute($stmt);
 $result= mysqli_stmt_get_result($stmt);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 }
+
 if(empty($row['Profil'])){
     header("Location: ./formularTemplate.php");
     exit();
@@ -58,8 +63,6 @@ if ($result->num_rows > 0) {
 }
 
 sort($favorite);
-
-
 ?>
 
 <!doctype html>
@@ -67,6 +70,7 @@ sort($favorite);
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="../logo.ico" type="image/x-icon" />
 
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -84,13 +88,8 @@ sort($favorite);
     <body>
         <!-- SIDE BAR -->
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a href="#">
-                <?php
-                if (isset($row['prenumeGmail']))
-                    print "Salut, ".$row['prenumeGmail'];
-                if (isset($row['Prenume']))
-                    print "Salut, ".$row['Prenume'];
-                ?>
+            <a href="/">
+                <?php require_once "navbar.php" ?>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon">☰</span>
@@ -205,7 +204,7 @@ sort($favorite);
                         <div class="row-lg-3 fav text-center">
                             <form action="./favoriteAlg.php" method="post">
                                 <?php
-                            echo '<button type="submit" style="all: unset" name="scoatere_fav" id="'.$card->Indexf.'" value="'.$card->Indexf.'"><i class="fas fa-heart"></i> Scoate de la favorite</button>';
+                            echo '<button id="favorite" style="all: unset" name="scoatere_fav" id="'.$card->Indexf.'" value="'.$card->Indexf.'"><i class="fas fa-heart"></i> Scoate de la favorite</button>';
                                 ?>
                             </form>
                         </div>
@@ -229,7 +228,23 @@ sort($favorite);
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="./JS/navbar.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function($){
+                $('#favorite').on('click', function(e){
+                    e.preventDefault();
+                    $.ajax({
+                        url: 'path/to/script.php',
+                        type: 'POST',
+                        data: {liked: false},
+                        cache: false,
+                        success: function(data){
+                            alert(data);
+                        }
+                    });
+                });
+            });
+        </script>
         <script src="./JS/homepage.js"></script>
     </body>
 </html>

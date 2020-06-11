@@ -1,87 +1,56 @@
 <?php
   session_start();
   require './folderlogin/datacon.php';
-  include 'array.php';
-  if (isset($_POST['formularsubmit']))
-{
-    $profil=$_POST['profil'];
-    $pasiune=$_POST['pasiune'];
-    $intensitate_pasiune=$_POST['intensitate_pasiune'];
-    $job=$_POST['job'];
-    $carti=$_POST['carti'];
-    $judet=$_POST['judet'];
-    $sport=$_POST['sport'];
-    $stres=$_POST['stres'];
-    $social=$_POST['social'];
-    $materie1=$_POST['materie1'];
-    $materie2=$_POST['materie2'];
-    $materie3=$_POST['materie3'];
+  
+  if (!isset($_POST['formularsubmit'])){
+    header("Location: ./formularTemplate.php");
+    exit();
+  }
 
-    function bolVal($val){
-      if($val!=0 && $val!=1){
-        header("Location: ./formularTemplate.php");
-        exit();
-      }
-    }
-    function arrayVal($val,$array){
-      if(!in_array($val,$array)){
-        header("Location: ./formularTemplate.php");
-        exit();
-      }
-    }
+  // check if information is valid
 
-    if(empty($pasiune) || empty($intensitate_pasiune) || empty($carti) || empty($judet) ||  empty($materie1) || empty($materie2) || empty($materie3)){
-      header("Location: ./formularTemplate.php");
-      exit();
-    }
-    if ($intensitate_pasiune>6 || $intensitate_pasiune<0) {
-      header("Location: ./formularTemplate.php");
-      exit();
-    }
-    bolVal($sport);
-    bolVal($stres);
-    bolVal($social);
-    bolVal($job);
+  // get data from json file
+  $jsonFile = file_get_contents("ajax/formular.json");
+  $jsonFile = json_decode($jsonFile, true);
+  
+  if( $_POST['sport'] != 0 && $_POST['sport'] != 1 ||
+      $_POST['stress'] != 0 && $_POST['stress'] != 1 ||
+      $_POST['social'] != 0 && $_POST['social'] != 1 ||
+      $_POST['job'] != 0 && $_POST['job'] != 1 ||
+      !in_array($_POST['county'], $jsonFile['county']) ||
+      !in_array($_POST['class-1'], $jsonFile['classes']) ||
+      !in_array($_POST['class-2'], $jsonFile['classes']) ||
+      !in_array($_POST['class-3'], $jsonFile['classes']) ||
+      !in_array($_POST['books'], $jsonFile['books']) ||
+      !in_array($_POST['branch'], $jsonFile['branch']) ||
+      !in_array($_POST['passion'], $jsonFile['passion']) ||
+      $_POST["passionIntensity"] > 6 || $_POST["passionIntensity"] < 0){
+    header("Location: ./formularTemplate.php?error=materii");
+    exit();
+  }
 
+  if (isset($_SESSION['mailUser']))
+  {
+    $session=$_SESSION['mailUser'];
+    $mysql="UPDATE users SET Profil=?,Domeniu=?,domeniu_intensitate=?,job=?,materie1=?,materie2=?,materie3=?,carti=?,sociabil=?,sport=?,stres=?,Judet=? WHERE mailUser=?";
+  }
+  elseif(isset($_SESSION['mailGmail']))
+  {
+    $session=$_SESSION['mailGmail'];
+    $mysql="UPDATE users_gmail SET Profil=?,Domeniu=?,domeniu_intensitate=?,job=?,materie1=?,materie2=?,materie3=?,carti=?,sociabil=?,sport=?,stres=?,Judet=? WHERE mailGmail=?";
+  }
 
-    arrayVal($judet,$array_judet);
-    arrayVal($materie1,$array_materie);
-    arrayVal($materie2,$array_materie1);
-    arrayVal($materie3,$array_materie1);
-    arrayVal($carti,$array_carti);
-    arrayVal($pasiune,$array_pasiune);
-    arrayVal($profil,$array_profil);
+  $stmt=mysqli_stmt_init($connection);
 
-    if (($materie1 == $materie2 || $materie1 == $materie3) || ($materie2 == $materie3 && $materie2!="Niciuna din cele de mai jos")) {
-      header("Location: ./formularTemplate.php?error=materii");
-      exit();
-    }
-
-    if (isset($_SESSION['mailUser']))
-    {
-      $session=$_SESSION['mailUser'];
-      $mysql="UPDATE users SET Profil=?,Domeniu=?,domeniu_intensitate=?,job=?,materie1=?,materie2=?,materie3=?,carti=?,sociabil=?,sport=?,stres=?,Judet=? WHERE mailUser=?";
-    }
-    elseif(isset($_SESSION['mailGmail']))
-    {
-      $session=$_SESSION['mailGmail'];
-      $mysql="UPDATE users_gmail SET Profil=?,Domeniu=?,domeniu_intensitate=?,job=?,materie1=?,materie2=?,materie3=?,carti=?,sociabil=?,sport=?,stres=?,Judet=? WHERE mailGmail=?";
-    }
-    $stmt=mysqli_stmt_init($connection);
-    if(!mysqli_stmt_prepare($stmt,$mysql)){
-      header("Location: ./formularTemplate.php?l");
-      exit();
-    }
-    mysqli_stmt_bind_param($stmt,"sssssssssssss",$profil,$pasiune,$intensitate_pasiune,$job,$materie1,$materie2,$materie3,$carti,$social,$sport,$stres,$judet,$session);
+  if(!mysqli_stmt_prepare($stmt,$mysql)){
+    header("Location: ./formularTemplate.php?database-error");
+    exit();
+  }
+  
+  mysqli_stmt_bind_param($stmt,"sssssssssssss", $_POST["branch"], $_POST["passion"], $_POST["passionIntensity"],
+                        $_POST["job"], $_POST["class-1"], $_POST["class-2"], $_POST["class-3"], $_POST["books"],
+                        $_POST["social"], $_POST["sport"], $_POST["stress"], $_POST["county"],$session);
     mysqli_stmt_execute($stmt);
 
-    header("Location: ./homePage.php");
-    exit();
-
-
-
-}
-else {
-  header("Location: ./formularTemplate.php");
+  header("Location: ./homePage.php");
   exit();
-}
